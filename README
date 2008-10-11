@@ -1,0 +1,40 @@
+= pagify 0.5
+by Lin Jen-Shin (a.k.a. godfat-真常[http://godfat.org])
+  godfat (XD) godfat.org
+
+== LINKS:
+
+* github-project[http://github.com/godfat/pagify]
+* rubyforge-project[http://rubyforge.org/projects/ludy]
+
+== DESCRIPTION:
+
+== FEATURES:
+
+== SYNOPSIS:
+
+== REQUIREMENTS:
+
+* ruby and one of your favorite web framework
+
+== INSTALL:
+
+* sudo gem install pagify
+
+== LICENSE:
+
+Apache License 2.0
+
+Copyright (c) 2008, Lin Jen-Shin (a.k.a. godfat 真常)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
