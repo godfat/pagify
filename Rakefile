@@ -38,9 +38,10 @@ PROJ.version = File.read('lib/pagify/version.rb').gsub(/.*VERSION = '(.*)'.*/m, 
 PROJ.manifest_file = 'Manifest'
 PROJ.exclude += ['Manifest', '^tmp', 'tmp$', '^pkg', '.gitignore', '^ann-']
 
+PROJ.rdoc.remote_dir = 'pagify'
+
 PROJ.readme_file = 'README'
 PROJ.rdoc.main = 'README'
-PROJ.rdoc.remote_dir = 'pagify'
 PROJ.rdoc.exclude += ['Rakefile', '^tasks', '^test']
 PROJ.rdoc.include << '\w+'
 PROJ.rdoc.opts << '--diagram' if !WIN32 and `which dot` =~ %r/\/dot/
