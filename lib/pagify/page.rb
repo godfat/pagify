@@ -28,7 +28,8 @@ module Pagify
     # if the page numbers and the pagers are equal,
     # then the pages are equal.
     def == rhs
-      page  == rhs.page and
+      rhs.kind_of?(BasicPage) &&
+      page  == rhs.page       &&
       pager == rhs.pager
     end
 

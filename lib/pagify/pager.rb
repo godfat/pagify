@@ -10,25 +10,36 @@ module Pagify
   # for example usage for Pager.
   class BasicPager
     include Enumerable
-    attr_reader   :fetcher, :counter
-    attr_accessor :per_page, :null_page
+    attr_reader :fetcher, :counter
+    attr_accessor :opts
+
+    [:per_page, :null_page].each{ |attr|
+      define_method(attr) do
+        opts[attr]
+      end
+
+      define_method("#{attr}=") do |new_value|
+        opts[attr] = new_value
+      end
+    }
 
     #  fetcher is function that fetch the data,
     #  counter is function that count the data,
     #  null_page indicates that pager sohuld
     # the default per_page is 20. you can reset per_page property later.
     def initialize opts = {}
-      raise ArgumentError.new('missing fetcher and/or counter') if
+      raise ArgumentError.new('missing fetcher and/or counter.') if
         !opts[:fetcher] || !opts[:counter]
 
-      raise ArgumentError.new('fetcher and/or counter do not respond to call') if
+      raise ArgumentError.new('fetcher or counter does not respond to call.') if
         !opts[:fetcher].respond_to?(:call) || !opts[:counter].respond_to?(:call)
 
+      @opts     = {}
       @fetcher  = opts[:fetcher]
       @counter  = opts[:counter]
 
-      @per_page  = opts[:per_page]  || 20
-      @null_page = opts[:null_page] || false
+      self.per_page  = opts[:per_page]  || 20
+      self.null_page = opts[:null_page] || false
     end
 
     # return a null pager that stubs anything to 0
@@ -56,7 +67,7 @@ module Pagify
       offset = (page - 1) * per_page
       if page <= 0 || offset >= count
         if null_page
-          return Page.null
+          return BasicPage.null
         else
           return nil
         end
@@ -80,5 +91,9 @@ module Pagify
       (page - 1) * per_page
     end
 
+    protected
+    def reject_pager_opts opts
+      opts.reject{ |key, value| [:per_page, :null_page].member?(key) }
+    end
   end
 end

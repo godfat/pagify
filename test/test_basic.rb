@@ -1,4 +1,6 @@
 
+require 'test/helper'
+
 class TestBasic < TestPagify
   def test_basic
     pager = Pagify::BasicPager.new(

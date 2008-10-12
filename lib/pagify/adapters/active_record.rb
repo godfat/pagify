@@ -1,6 +1,8 @@
 
 # you'll need activerecord to use ActiveRecordPager
 
+require 'pagify/pagifier'
+
 module Pagify
   # active_record paginator was provided for convenience,
   # it wraps Paginator for you, and you can just pass the model class to it.
@@ -15,12 +17,14 @@ module Pagify
 
     def initialize model_class, opts = {}
       @model_class = model_class
+      query_opts = reject_pager_opts(opts)
+
       super(opts.merge(
         :fetcher => lambda{ |offset, per_page|
-          model_class.find(:all, opts.merge(:offset => offset, :limit => per_page))
+          model_class.find(:all, query_opts.merge(:offset => offset, :limit => per_page))
         },
         :counter => lambda{
-          model_class.count(opts)
+          model_class.count(query_opts)
         }))
     end
 
@@ -28,4 +32,23 @@ module Pagify
     def page page; super page.to_i; end
 
   end
+
+end
+
+class ActiveRecord::Base
+  extend Pagify::Pagifier
+
+  class << self
+    alias_method :__pagify__, :pagify
+  end
+
+  # wrap pagify for named_scope!
+  named_scope(:pagify, lambda{ |opts|
+    __pagify__(opts).pager.opts
+  })
+
+  def self.pagify_pager_create model, opts
+    Pagify::ActiveRecordPager.new model, opts
+  end
+
 end

@@ -1,19 +1,27 @@
 
 # you'll need dm-core and dm-aggregates to use DataMapperPager
 
+require 'pagify/pagifier'
+
 module Pagify
 
   class DataMapperPager < BasicPager
-    attr_reader :model_class
+    attr_reader :model
 
-    def initialize model_class, opts = {}
-      @model_class = model_class
+    def initialize model_class, query = {}, opts = {}
+      @model = model_class
+      query_opts = reject_pager_opts(opts)
+
       super(opts.merge(
         :fetcher => lambda{ |offset, per_page|
-          model_class.all(opts.merge(:offset => offset, :limit => per_page))
+          model.send :with_scope, query do
+            model.all(query_opts.merge(:offset => offset, :limit => per_page))
+          end
         },
         :counter => lambda{
-          model_class.count(opts)
+          model.send :with_scope, query do
+            model.count(query_opts)
+          end
         }))
     end
 
@@ -22,4 +30,13 @@ module Pagify
 
   end
 
+end
+
+module DataMapper
+  module Model
+    include Pagify::Pagifier
+    def pagify_pager_create model, opts
+      Pagify::DataMapperPager.new model, model.query, opts
+    end
+  end
 end

@@ -22,6 +22,9 @@ namespace :gem do
   end
 end
 
+# supress warnings, there's too many warnings in dm-core
+PROJ.ruby_opts.delete '-w'
+
 PROJ.name = 'pagify'
 PROJ.authors = 'Lin Jen-Shin (a.k.a. godfat 真常)'
 PROJ.email = 'godfat (XD) godfat.org'
@@ -36,7 +39,7 @@ PROJ.version = File.read('lib/pagify/version.rb').gsub(/.*VERSION = '(.*)'.*/m, 
 # PROJ.gem.files = []
 
 PROJ.manifest_file = 'Manifest'
-PROJ.exclude += ['Manifest', '^tmp', 'tmp$', '^pkg', '.gitignore', '^ann-']
+PROJ.exclude += ['Manifest', '^tmp', 'tmp$', '^pkg', '.gitignore', '^ann-', '.sqlite3', '.db']
 
 PROJ.rdoc.remote_dir = 'pagify'
 

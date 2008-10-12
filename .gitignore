@@ -3,3 +3,5 @@ pkg
 doc
 ann-*
 *.rbc
+*.sqlite3
+*.db
