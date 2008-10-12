@@ -1,4 +1,6 @@
 
+# you'll need activerecord to use ActiveRecordPager
+
 module Pagify
   # active_record paginator was provided for convenience,
   # it wraps Paginator for you, and you can just pass the model class to it.

@@ -1,4 +1,6 @@
 
+# you'll need dm-core and dm-aggregates to use DataMapperPager
+
 module Pagify
 
   class DataMapperPager < BasicPager
@@ -19,4 +21,5 @@ module Pagify
     def page page; super page.to_i; end
 
   end
+
 end
