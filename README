@@ -15,9 +15,9 @@ by Lin Jen-Shin (a.k.a. godfat-真常[http://godfat.org])
 
 == REQUIREMENTS:
 
-* for Basic/Array Pager: none
-* for DataMapper Pager: dm-core and dm-aggregates
-* for ActiveRecord Pager: activerecord
+* for Basic/Array  Pager: only ruby is needed
+* for DataMapper   Pager: dm-core and dm-aggregates 0.9.6 and above
+* for ActiveRecord Pager: activerecord 2.1.1 and above
 
 == INSTALL:
 
