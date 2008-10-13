@@ -10,8 +10,8 @@ module Pagify
 
     def initialize model_class, query = {}, opts = {}
       @model = model_class
-      query_opts = reject_pager_opts(opts)
       query ||= {}
+      query_opts = reject_pager_opts(opts)
 
       super(opts.merge(
         :fetcher => lambda{ |offset, per_page|
