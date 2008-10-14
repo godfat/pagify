@@ -35,20 +35,11 @@ module Pagify
 
 end
 
-class ActiveRecord::Base
-  extend Pagify::Pagifier
-
-  class << self
-    alias_method :__pagify__, :pagify
+[ActiveRecord::Base, ActiveRecord::Associations::AssociationCollection].each{ |model|
+  model.module_eval do
+    extend Pagify::Pagifier
+    def self.pagify_pager_create model, opts
+      Pagify::ActiveRecordPager.new model, opts
+    end
   end
-
-  # wrap pagify for named_scope!
-  named_scope(:pagify, lambda{ |opts|
-    __pagify__(opts).pager.opts
-  })
-
-  def self.pagify_pager_create model, opts
-    Pagify::ActiveRecordPager.new model, opts
-  end
-
-end
+}

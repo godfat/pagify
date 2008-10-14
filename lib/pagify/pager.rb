@@ -65,7 +65,7 @@ module Pagify
     # nil would be returned. note, page start at 1, not zero.
     def page page
       offset = (page - 1) * per_page
-      if page <= 0 || offset >= count
+      if page <= 0 || offset >= entries_count
         if null_page
           return BasicPage.null
         else
@@ -80,10 +80,10 @@ module Pagify
     alias_method :[], :page
 
     # return the amount of pages
-    def size; (count / per_page.to_f).ceil; end
+    def size; (entries_count / per_page.to_f).ceil; end
 
     # simply call @counter.call
-    def count; counter.call; end
+    def entries_count; counter.call; end
 
     # get the offset property about the page.
     # it is simply (page-1)*@per_page

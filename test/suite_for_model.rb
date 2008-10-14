@@ -2,8 +2,6 @@
 require 'extlib'
 
 module SuiteForModel
-  include Extlib::Hook
-
   def test_same_pager_with_same_opts
     users1 = model.pagify :page => 1, :per_page => 2
     pager = model.pagify_pager
@@ -33,21 +31,23 @@ module SuiteForModel
   def test_condition_chain
     users_A = model.all(:conditions => ['name = ?', 'A']).pagify :page => 1, :per_page => 1
     assert_equal 1, users_A.size
-    assert_equal 2, users_A.pager.count # entries
+    assert_equal 2, users_A.pager.entries_count
     assert_equal 2, users_A.pager.size # pages
   end
 
-  private
-  def i_give_up
-    if self.class == TestActiveRecord
-      skip "it's toooooo hard to implement this for active record!! patch wanted!"
-    end
-  end
-
-  [:test_same_pager_with_same_opts,
-   :test_page_correctness,
-   :test_condition_chain].each{ |test|
-    before test.to_sym, :i_give_up
-  }
+  # include Extlib::Hook
+  #
+  # private
+  # def i_give_up
+  #   if self.class == TestActiveRecord
+  #     skip "it's toooooo hard to implement this for active record!! patch wanted!"
+  #   end
+  # end
+  #
+  # [:test_same_pager_with_same_opts,
+  #  :test_page_correctness,
+  #  :test_condition_chain].each{ |test|
+  #   before test.to_sym, :i_give_up
+  # }
 
 end
