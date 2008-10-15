@@ -33,13 +33,19 @@ class TestDataMapper < TestPagify
     include DataMapper::Resource
     property :id, Serial
     property :name, String
-    auto_migrate!
-
-    create :name => 'A'
-    create :name => 'A'
-    create :name => 'B'
+    has n, :pets
   end
-  def model; User; end
+
+  class Pet
+    include DataMapper::Resource
+    property :id, Serial
+    property :name, String
+    belongs_to :user
+  end
+
+  User.auto_migrate!
+  Pet.auto_migrate!
 
   include SuiteForModel
+
 end

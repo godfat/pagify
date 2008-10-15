@@ -23,7 +23,7 @@ class TestActiveRecord < TestPagify
   end
 
   # i am tired with active record!!
-  DataMapper.setup :active_record, 'sqlite3:active_record.sqlite3'
+  DataMapper.setup :active_record, 'sqlite3:test/active_record.sqlite3'
   class UserForActiveRecord
     include DataMapper::Resource
     property :id, Serial
@@ -38,14 +38,29 @@ class TestActiveRecord < TestPagify
     auto_migrate!
   end
 
-  class User < ActiveRecord::Base
-    establish_connection :adapter => 'sqlite3', :database => 'active_record.sqlite3'
-
-    create :name => 'A'
-    create :name => 'A'
-    create :name => 'B'
+  class PetForActiveRecord
+    include DataMapper::Resource
+    property :id, Serial
+    property :name, String
+    property :user_id, Integer
+    def self.default_repository_name
+      :active_record
+    end
+    storage_names[default_repository_name] = 'pets'
+    auto_migrate!
   end
-  def model; User; end
+
+  ActiveRecord::Base.establish_connection(
+    :adapter => 'sqlite3', :database => 'test/active_record.sqlite3')
+
+  class User < ActiveRecord::Base
+    has_many :pets
+  end
+
+  class Pet < ActiveRecord::Base
+    belongs_to :user
+  end
 
   include SuiteForModel
+
 end

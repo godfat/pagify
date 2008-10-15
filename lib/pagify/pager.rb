@@ -48,6 +48,7 @@ module Pagify
     # if two paginators are equal, then the properties of
     # per_page, fetcher, counter are all equal.
     def == rhs
+      return false unless rhs
       self.per_page == rhs.per_page and
       self.fetcher  == rhs.fetcher  and
       self.counter  == rhs.counter
