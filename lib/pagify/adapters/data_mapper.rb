@@ -1,8 +1,6 @@
 
 # you'll need dm-core and dm-aggregates to use DataMapperPager
 
-require 'pagify/pagifier'
-
 module Pagify
 
   class DataMapperPager < BasicPager

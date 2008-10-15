@@ -1,5 +1,5 @@
 
-require 'extlib'
+# require 'extlib'
 
 module SuiteForModel
   def test_same_pager_with_same_opts

@@ -1,8 +1,8 @@
 
 module Pagify
-  autoload         :ArrayPager, 'pagify/adapters/array'
-  autoload    :DataMapperPager, 'pagify/adapters/data_mapper'
-  autoload  :ActiveRecordPager, 'pagify/adapters/active_record'
+  autoload         :ArrayPager, 'pagify/array'
+  autoload    :DataMapperPager, 'pagify/dm'
+  autoload  :ActiveRecordPager, 'pagify/ar'
 
   autoload :VERSION, 'pagify/version'
 end
