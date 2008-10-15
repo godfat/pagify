@@ -63,4 +63,8 @@ class TestActiveRecord < TestPagify
 
   include SuiteForModel
 
+  def all_pets_with_name_godfat user
+    user.pets.all(:conditions => ['name = ?', 'godfat'])
+  end
+
 end

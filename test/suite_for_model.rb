@@ -68,8 +68,9 @@ module SuiteForModel
     assert user.save
     assert_equal 3, user.pets.count
 
-    page = user.pets.pagify :page => 1, :per_page => 1
+    page = all_pets_with_name_godfat(user).pagify :page => 2, :per_page => 1
     assert_equal 1, page.size
+    assert_equal 2, page.pager.size
   end
 
   def self.included test_case
@@ -87,7 +88,7 @@ module SuiteForModel
 
     test_case.const_get(:Pet).module_eval do
       create :name => 'Qoo'
-      create :name => 'Qooooo'
+      create :name => 'godfat'
       create :name => 'godfat'
     end
   end

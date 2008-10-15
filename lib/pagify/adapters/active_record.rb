@@ -11,18 +11,18 @@ module Pagify
   # would invoke Model.find :all, :offset => ?, :limit => ?, order => 'created_at DESC'
   class ActiveRecordPager < BasicPager
     # the model class that you passed in this paginator
-    attr_reader :model_class
+    attr_reader :model
 
     def initialize model_class, opts = {}
-      @model_class = model_class
+      @model = model_class
       query_opts = reject_pager_opts(opts)
 
       super(opts.merge(
         :fetcher => lambda{ |offset, per_page|
-          model_class.find(:all, query_opts.merge(:offset => offset, :limit => per_page))
+          model.find(:all, query_opts.merge(:offset => offset, :limit => per_page))
         },
         :counter => lambda{
-          model_class.count(query_opts)
+          model.count(query_opts)
         }))
     end
 
@@ -33,8 +33,8 @@ module Pagify
 
 end
 
-[ActiveRecord::Base, ActiveRecord::Associations::AssociationCollection].each{ |model|
-  model.module_eval do
+[ActiveRecord::Base, ActiveRecord::Associations::AssociationCollection].each{ |klass|
+  klass.module_eval do
     extend Pagify::Pagifier
     def self.pagify_pager_create model, opts
       Pagify::ActiveRecordPager.new model, opts
