@@ -13,9 +13,9 @@ module Pagify
             :prev_text => '&lt; Previous',
             :next_text =>          'Next &gt;',
           :inner_links => 4,
-          :outer_links => 1,
-          :separator   => ' ',
-          :param_name  => 'page' }
+          :outer_links => 2,
+                 :step => 3,
+          :separator   => ' ' }
       end
     end
     setup HTML
