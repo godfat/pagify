@@ -61,12 +61,16 @@ module Pagify
     def to_a; map{ |e| e }; end
     alias_method :pages, :to_a
 
+    def page_exists? page
+      offset = (page - 1) * per_page
+      page <= 0 || offset >= entries_count
+    end
+
     # create page instance by page number.
     # if page number you specified was not existed,
     # nil would be returned. note, page start at 1, not zero.
     def page page
-      offset = (page - 1) * per_page
-      if page <= 0 || offset >= entries_count
+      if page_exists?(page)
         if null_page
           return BasicPage.null
         else

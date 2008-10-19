@@ -1,5 +1,6 @@
 
 require 'test/helper'
+require 'test/test_pagify'
 
 class TestBasic < TestPagify
   def test_basic

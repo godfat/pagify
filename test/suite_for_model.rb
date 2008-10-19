@@ -1,5 +1,6 @@
 
 # require 'extlib'
+require 'test/test_pagify'
 
 module SuiteForModel
 

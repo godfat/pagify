@@ -1,4 +1,6 @@
 
+require 'rubygems'
+
 module Pagify
   # which was produced by Paginator#page / Paginator#[],
   # representing page that contained target data.

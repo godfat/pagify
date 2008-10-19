@@ -24,6 +24,11 @@ module Pagify
         @attributes = extract_default_attributes @helper
       end
 
+      def reject_default
+        defaults = extract_default_attributes(@helper).keys
+        @attributes.reject{ |key, value| defaults.member?(key) }
+      end
+
       private
       def extract_default_attributes helper
         if helper.respond_to? :default_attributes

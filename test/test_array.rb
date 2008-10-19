@@ -1,5 +1,6 @@
 
 require 'test/helper'
+require 'test/test_pagify'
 
 class TestArray < TestPagify
   def test_offset_bug

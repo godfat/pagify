@@ -1,5 +1,6 @@
 
-require 'pagify'
+require 'test/helper'
+
 require 'pagify/helpers/html'
 
 class TestHTML < MiniTest::Unit::TestCase
@@ -47,19 +48,19 @@ class TestHTML < MiniTest::Unit::TestCase
   end
 
   def test_generate_html
-    skip 'not implemented'
+    # skip 'not implemented'
 
     pager = Pagify::ArrayPager.new((1..1000).to_a, :per_page => 10)
     users = pager[50]
 
-    assert_equal('<a href="49">&lt; Previous</a> 50 <a href="51">Next &gt;</a><br />'+
+    assert_equal(#'<a href="49">&lt; Previous</a> 50 <a href="51">Next &gt;</a><br />'+
                  '<a href="1">&laquo; First</a> ' +
                  '<a href="2">2</a> ' + # outer links
-                 '... ' +
-                 '<a href="31">31</a> ' + # step links, offset = step * step
-                 '... ' +
-                 '<a href="40">40</a> ' + # step links, amount = inner / 2
-                 '<a href="43">43</a> ' +
+                 # '... ' +
+                 # '<a href="31">31</a> ' + # step links, offset = step * step
+                 # '... ' +
+                 # '<a href="40">40</a> ' + # step links, amount = inner / 2
+                 # '<a href="43">43</a> ' +
                  '... ' +
                  '<a href="46">46</a> ' + # inner links
                  '<a href="47">47</a> ' +
@@ -71,13 +72,38 @@ class TestHTML < MiniTest::Unit::TestCase
                  '<a href="53">53</a> ' +
                  '<a href="54">54</a> ' + # inner links
                  '... ' +
-                 '<a href="57">57</a> ' +
-                 '<a href="60">60</a> ' + # step links, amount = inner / 2
-                 '... ' +
-                 '<a href="69">69</a> ' + # step links, offset = step * step
-                 '... ' +
+                 # '<a href="57">57</a> ' +
+                 # '<a href="60">60</a> ' + # step links, amount = inner / 2
+                 # '... ' +
+                 # '<a href="69">69</a> ' + # step links, offset = step * step
+                 # '... ' +
                  '<a href="99">99</a> ' + # outer links
-                 '<a href="100">Last &raquo;</a>', users.pager.html.links(50){ |i| i.to_s } )
+                 '<a href="100">Last &raquo;</a>',
+                 users.pager.html.links(50){ |i| i.to_s } )
+  end
+
+  def test_with_class
+    pager = Pagify::ArrayPager.new((1..1000).to_a, :per_page => 10)
+    pager.html.setting[:class] = 'pagify'
+    users = pager[50]
+
+    assert_equal(#'<a href="49">&lt; Previous</a> 50 <a href="51">Next &gt;</a><br />'+
+                 '<a href="1" class="pagify">&laquo; First</a> ' +
+                 '<a href="2" class="pagify">2</a> ' + # outer links
+                 '... ' +
+                 '<a href="46" class="pagify">46</a> ' + # inner links
+                 '<a href="47" class="pagify">47</a> ' +
+                 '<a href="48" class="pagify">48</a> ' +
+                 '<a href="49" class="pagify">49</a> ' +
+                 '50 ' +
+                 '<a href="51" class="pagify">51</a> ' +
+                 '<a href="52" class="pagify">52</a> ' +
+                 '<a href="53" class="pagify">53</a> ' +
+                 '<a href="54" class="pagify">54</a> ' + # inner links
+                 '... ' +
+                 '<a href="99" class="pagify">99</a> ' + # outer links
+                 '<a href="100" class="pagify">Last &raquo;</a>',
+                 users.pager.html.links(50){ |i| i.to_s } )
   end
 
 end
