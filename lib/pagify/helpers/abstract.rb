@@ -19,19 +19,31 @@ module Pagify
         @setting ||= Setting.new(self, self.class.setting)
       end
 
-      def links page
+      protected
+      def prepare_links page
         size = pager.size
 
-        inner_prev, inner_post = links_for_prev_and_post(setting[:inner_links], page, size)
-        outer_prev, outer_post = [ (1..setting[:outer_links]).to_a,
-                                   ((size - setting[:outer_links] + 1)..size).to_a ]
+        # caculate index
+        inner_last  = setting[:outer_links] < size ? setting[:outer_links] : size
+        outer_begin = size - setting[:outer_links] + 1
+        outer_begin = 1 if outer_begin < 1
 
+        # caculate inner
+        inner_prev, inner_post = links_for_prev_and_post(setting[:inner_links], page, size)
+        outer_prev, outer_post = [ (           1 .. inner_last ).to_a,
+                                   ( outer_begin .. size       ).to_a  ]
+
+        # remove current page
+        outer_prev.delete(page)
+        outer_post.delete(page)
+
+        # concat outer and inner
         links_prev = outer_prev + ['...'] + inner_prev
         links_post = inner_post + ['...'] + outer_post
 
-        # remove '...' if there's overlap
-        links_prev.delete('...') if links_prev.uniq!
-        links_post.delete('...') if links_post.uniq!
+        # clean up overlap and remove '...' if there's overlap or no pages there
+        links_prev.delete('...') if links_prev.uniq! || links_prev.size == 1
+        links_post.delete('...') if links_post.uniq! || links_post.size == 1
 
         links_prev + [page] + links_post
       end

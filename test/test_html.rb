@@ -79,7 +79,7 @@ class TestHTML < MiniTest::Unit::TestCase
                  # '... ' +
                  '<a href="99">99</a> ' + # outer links
                  '<a href="100">Last &raquo;</a>',
-                 users.pager.html.links(50){ |i| i.to_s } )
+                 users.pager.html.links(50, &:to_s) )
   end
 
   def test_with_class
@@ -104,6 +104,21 @@ class TestHTML < MiniTest::Unit::TestCase
                  '<a href="99" class="pagify">99</a> ' + # outer links
                  '<a href="100" class="pagify">Last &raquo;</a>',
                  users.pager.html.links(50){ |i| i.to_s } )
+  end
+
+  def test_no_page
+    pager = Pagify::ArrayPager.new([1], :per_page => 10)
+    first_only pager
+    pager.html.setting[:outer_links] = 10
+    first_only pager
+    pager.html.setting[:inner_links] = 1
+    first_only pager
+    pager.html.setting[:inner_links] = 5
+    first_only pager
+  end
+
+  def first_only pager
+    assert_equal('&laquo; First', pager.html.links(1, &:to_s))
   end
 
 end

@@ -20,16 +20,22 @@ module Pagify
 
       def links page
         size = pager.size
+
         attrs = setting.reject_default.map{ |key, value| "#{key}=\"#{value}\"" }.join(' ')
         attrs = ' ' + attrs if attrs != ''
-        super(page).map{ |i|
-          case i
-            when 1;      "<a href=\"#{yield(i)}\"#{attrs}>#{setting[:first_text]}</a>"
-            when size;   "<a href=\"#{yield(i)}\"#{attrs}>#{setting[ :last_text]}</a>"
-            when Fixnum; i == page ? i : "<a href=\"#{yield(i)}\"#{attrs}>#{i}</a>"
-            else;        i.to_s
+
+        prepare_links(page).map{ |i|
+          if i == page
+            page == 1 ? setting[:first_text] : page
+          else
+            case i
+              when 1;      "<a href=\"#{yield(i)}\"#{attrs}>#{setting[:first_text]}</a>"
+              when size;   "<a href=\"#{yield(i)}\"#{attrs}>#{setting[ :last_text]}</a>"
+              when Fixnum; "<a href=\"#{yield(i)}\"#{attrs}>#{i}</a>"
+              else;        i.to_s
+            end
           end
-        }.join(' ')
+        }.join(setting[:separator])
       end
 
     end
