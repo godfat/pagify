@@ -105,7 +105,7 @@ class TestHTML < MiniTest::Unit::TestCase
                  'zzz,,' +
                  '<a href="99" class="pagify">99</a>,,' + # outer links
                  '<a href="100" class="pagify">Last &raquo;</a>',
-                 users.pager.html.links(50){ |i| i.to_s } )
+                 users.pager.html.links(50, &:to_s) )
   end
 
   def test_no_page
