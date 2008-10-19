@@ -31,3 +31,4 @@ test/test_basic.rb
 test/test_data_mapper.rb
 test/test_html.rb
 test/test_null.rb
+test/test_pagify.rb
