@@ -17,6 +17,11 @@ module Pagify
                  :step => 3,
           :separator   => ' ' }
       end
+
+      def links page
+        
+      end
+
     end
     setup HTML
   end

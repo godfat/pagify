@@ -3,6 +3,11 @@ require 'pagify'
 require 'pagify/helpers/html'
 
 class TestHTML < MiniTest::Unit::TestCase
+  # def test_page_and_pager_has_same_html
+  #   pager = Pagify::ArrayPager.new [1]
+  #   assert_equal pager.html.object_id, pager[1].html.object_id
+  # end
+
   def test_html
     pager1 = Pagify::ArrayPager.new []
     assert_equal ' ', pager1.html.setting[:separator]
@@ -45,6 +50,7 @@ class TestHTML < MiniTest::Unit::TestCase
     skip 'not implemented'
 
     pager = Pagify::ArrayPager.new((1..1000).to_a, :per_page => 10)
+    users = pager[50]
 
     assert_equal('<a href="49">&lt; Previous</a> 50 <a href="51">Next &gt;</a><br />'+
                  '<a href="1">&laquo; First</a> ' +
@@ -71,7 +77,7 @@ class TestHTML < MiniTest::Unit::TestCase
                  '<a href="69">69</a> ' + # step links, offset = step * step
                  '... ' +
                  '<a href="99">99</a> ' + # outer links
-                 '<a href="100">Last &raquo;</a>', pager[50].html.links)
+                 '<a href="100">Last &raquo;</a>', users.pager.html.links(50){ |i| i.to_s } )
   end
 
 end

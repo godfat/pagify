@@ -2,21 +2,24 @@
 module Pagify
   module Helpers
     class Abstract
-      class << self
-        def default_attributes
-          raise NotImplementedError
-        end
+      def self.default_attributes
+        raise NotImplementedError
+      end
 
-        def setting
-          @setting ||= Setting.new(self)
-        end
+      def self.setting
+        @setting ||= Setting.new(self)
+      end
+
+      attr_reader :pager
+      def initialize pager
+        @pager = pager
       end
 
       def setting
         @setting ||= Setting.new(self, self.class.setting)
       end
 
-      def generate
+      def links page
         raise NotImplementedError
       end
 
