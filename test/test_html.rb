@@ -85,23 +85,25 @@ class TestHTML < MiniTest::Unit::TestCase
   def test_with_class
     pager = Pagify::ArrayPager.new((1..1000).to_a, :per_page => 10)
     pager.html.setting[:class] = 'pagify'
+    pager.html.setting[:separator] = ',,'
+    pager.html.setting[:ellipsis] = 'zzz'
     users = pager[50]
 
     assert_equal(#'<a href="49">&lt; Previous</a> 50 <a href="51">Next &gt;</a><br />'+
-                 '<a href="1" class="pagify">&laquo; First</a> ' +
-                 '<a href="2" class="pagify">2</a> ' + # outer links
-                 '... ' +
-                 '<a href="46" class="pagify">46</a> ' + # inner links
-                 '<a href="47" class="pagify">47</a> ' +
-                 '<a href="48" class="pagify">48</a> ' +
-                 '<a href="49" class="pagify">49</a> ' +
-                 '50 ' +
-                 '<a href="51" class="pagify">51</a> ' +
-                 '<a href="52" class="pagify">52</a> ' +
-                 '<a href="53" class="pagify">53</a> ' +
-                 '<a href="54" class="pagify">54</a> ' + # inner links
-                 '... ' +
-                 '<a href="99" class="pagify">99</a> ' + # outer links
+                 '<a href="1" class="pagify">&laquo; First</a>,,' +
+                 '<a href="2" class="pagify">2</a>,,' + # outer links
+                 'zzz,,' +
+                 '<a href="46" class="pagify">46</a>,,' + # inner links
+                 '<a href="47" class="pagify">47</a>,,' +
+                 '<a href="48" class="pagify">48</a>,,' +
+                 '<a href="49" class="pagify">49</a>,,' +
+                 '50,,' +
+                 '<a href="51" class="pagify">51</a>,,' +
+                 '<a href="52" class="pagify">52</a>,,' +
+                 '<a href="53" class="pagify">53</a>,,' +
+                 '<a href="54" class="pagify">54</a>,,' + # inner links
+                 'zzz,,' +
+                 '<a href="99" class="pagify">99</a>,,' + # outer links
                  '<a href="100" class="pagify">Last &raquo;</a>',
                  users.pager.html.links(50){ |i| i.to_s } )
   end
@@ -119,6 +121,11 @@ class TestHTML < MiniTest::Unit::TestCase
 
   def first_only pager
     assert_equal('&laquo; First', pager.html.links(1, &:to_s))
+  end
+
+  def test_nothing
+    pager = Pagify::ArrayPager.new([1,2,3])
+    assert_equal '', pager.html.links_prev_next(1, &:to_s)
   end
 
 end

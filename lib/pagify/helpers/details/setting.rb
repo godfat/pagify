@@ -1,6 +1,9 @@
 
+require 'pagify/helpers/abstract'
+
 module Pagify
   module Helpers
+    # TODO: refactor me!!
     class Setting
       def initialize helper, parent = {}
         @helper = helper
@@ -20,13 +23,19 @@ module Pagify
         @attributes[key] = value
       end
 
+      def to_hash
+        @attributes.dup
+      end
+
       def restore_default!
         @attributes = extract_default_attributes @helper
       end
 
-      def reject_default
-        defaults = extract_default_attributes(@helper).keys
-        @attributes.reject{ |key, value| defaults.member?(key) }
+      def additional_attributes
+        defaults = extract_default_attributes(
+                     @helper.kind_of?(Abstract) ? @helper.class : @helper).keys
+
+        @parent.to_hash.merge(@attributes).reject{ |key, value| defaults.member?(key) }
       end
 
       private

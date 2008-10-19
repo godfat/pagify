@@ -15,14 +15,36 @@ module Pagify
           :inner_links => 4,
           :outer_links => 2,
         #        :step => 3,
-          :separator   => ' ' }
+          :separator   => ' ',
+          :ellipsis    => '...' }
+      end
+
+      def links_full page, &block
+        "#{links_prev_next(page, &block)}<br />\n#{links(page, &block)}"
+      end
+
+      def links_prev_next page
+        size = pager.size
+        attrs = extract_html_attributes
+
+        prev = if page > 1 && page_exists?(page - 1, size)
+                 "<a href=\"#{yield(page - 1)}\"#{attrs}>#{setting[:prev_text]}</a>"
+               else
+                 ''
+               end
+
+        post = if page < size && page_exists?(page + 1, size)
+                 "<a href=\"#{yield(page + 1)}\"#{attrs}>#{setting[:next_text]}</a>"
+               else
+                 ''
+               end
+
+        prev + post
       end
 
       def links page
         size = pager.size
-
-        attrs = setting.reject_default.map{ |key, value| "#{key}=\"#{value}\"" }.join(' ')
-        attrs = ' ' + attrs if attrs != ''
+        attrs = extract_html_attributes
 
         prepare_links(page).map{ |i|
           if i == page
@@ -38,6 +60,14 @@ module Pagify
         }.join(setting[:separator])
       end
 
+      private
+      def extract_html_attributes
+        attrs = setting.additional_attributes.
+                  map{ |key, value| "#{key}=\"#{value}\"" }.join(' ')
+
+        attrs = ' ' + attrs if attrs != ''
+        attrs
+      end
     end
     setup HTML
   end

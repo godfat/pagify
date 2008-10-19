@@ -5,7 +5,7 @@ module Pagify
       Pagify::BasicPager.module_eval do
         helper_name = helper_class.to_s.downcase[/::?(\w+)$/, 1]
         define_method helper_name do
-          variable_name   = "@helper_#{helper_name}"
+          variable_name = "@helper_#{helper_name}"
           instance_variable_get(variable_name) or
           instance_variable_set(variable_name, helper_class.new(self))
         end
