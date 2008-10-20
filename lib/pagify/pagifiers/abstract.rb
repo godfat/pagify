@@ -4,12 +4,12 @@ module Pagify
 
     attr_reader :pagify_pager
 
-    # turn on cache if single threaded
     def pagify_cache
       @pagify_cache ||= false
     end
 
     # cleanup cache if turn off cache
+    # NOTE: you would face thread-safety problem if you turn on cache
     def pagify_cache= bool
       @pagify_pager = nil unless bool
       @pagify_cache = bool

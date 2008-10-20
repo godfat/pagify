@@ -19,7 +19,7 @@ by Lin Jen-Shin (a.k.a. godfat-真常[http://godfat.org])
 
 == SYNOPSIS:
 
- the easiest way to use:
+ the easiest (but not recommended) way to use it is:
 
  require 'pagify/data_mapper'
  require 'pagify/helpers/html'
@@ -38,40 +38,59 @@ by Lin Jen-Shin (a.k.a. godfat-真常[http://godfat.org])
    belongs_to :user
  end
 
- User.pagify page => 1, :per_page => 10 # => create a page contains users
- User.all(:name => 'godfat').pagify     # => create a page contains users named godfat
+ User.pagify :page => 1, :per_page => 10 # => create a page contains users
+ User.all(:name => 'godfat').pagify      # => create a page contains users named godfat
 
- User.get(1).pets.pagify                # => create a page contains pets owned by user 1
- # NOTE: this would create a whole new pager if you never set pagify_cache = true,
- # NOTE: and if you set pagify_cache = true, be careful of THREAD-SAFETY problem!!
+ User.get(1).pets.pagify                 # => create a page contains pets owned by user 1
 
- Pet.pagify.pager.html.links{ |page| # => create a string with page links
+ # create a string with page links.
+ Pet.pagify.pager.html.links(params[:page]){ |page|
    # the block result would be used as url for each page
-   "/pets/show?page=#{page}"
+   "/pets/list?page=#{page}"
  }
 
  Pagify::Helpers::HTML.setting[:prev_text] = '<]' # globally change html setting
- # NOTE: because pagify would create a new pager, instance level setting would fail!
  # NOTE: if you would like to use instance level setting, you shouldn't use method pagify,
- # NOTE: or use pagify_cache = true and face thread-safety problem.
+ # NOTE: or use User.pagify_cache = true; and face thread-safety problem.
 
- pet_pager = Pagify::DataMapperPager.new Pet # create pager by hand
- pet_pager.page(5) # return page 5 which contains pets in page 5.
+ and the recommended usage is:
 
- pet_pager.html.setting[:next_text] = '[>' # change html setting for this pager.
- # NOTE: if you call setting.delete(:next_text) or call setting.restore_default!
- # NOTE: the pager would use class level (global) html setting, mentioned above.
+ class Pet
+ # same as above
+   def self.page num
+     @pager ||= begin
+       pager = Pagify::DataMapperPager.new(:per_page => 20)
+       # below would be pager instance level setting
+       # you can setup global setting mentioned above in your init script perhaps
+       pager.html.setting[:separator] = ' . '
+       pager.html.setting[:ellipsis]  = '...'
+       pager
+     end
+     @pager.page(num)
+   end
+ end
 
- pet_pager.page(1).html.links_navigate{ |page| # => this would create next/prev links only.
+ then you would use Pet.page(3) or user.pets.page(2) without encountering
+ thread-safety problem or create a whole new pager in each request.
+
+ # this would create next/prev links only.
+ Pet.page(1).html.links_navigate{ |page|
+   "/pets/list?page=#{page}"
+ }
+
+ # this would create next/prev links and other page links
+ pet_pager.page(1).html.links_full{ |page|
    "/pets/show?page=#{page}"
  }
 
- # => this would create next/prev links and other page links
- pet_pager.page(1).html.links_full{ |page|
-   "/pets/show?page=#{page}"
-  }
+ and you can build your pager from scratch via BasicPager.
+ e.g. BasicPager.new :fetcher => lambda{|*a|[]}, :counter => lambda{0}
+ this would be similar to Pagify::NullPager.
 
- see unit test for full example.
+ you can disable null page via passing :null_page => false to any pager,
+ or set pager.null_page = false; anytime.
+
+ see example or test for more examples (and use case for ActiveRecordPager).
 
 == REQUIREMENTS:
 
