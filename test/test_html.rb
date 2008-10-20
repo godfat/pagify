@@ -132,6 +132,20 @@ class TestHTML < MiniTest::Unit::TestCase
     pager = Pagify::ArrayPager.new([1,2,3], :per_page => 2)
     assert_equal '&laquo; First <a href="2">Last &raquo;</a>', pager.html.links(1, &:to_s)
     assert_equal '<a href="1">&laquo; First</a> Last &raquo;', pager.html.links(2, &:to_s)
+
+    assert_equal '<a href="2">Next &gt;</a>', pager.html.links_navigate(1, &:to_s)
+    assert_equal '<a href="1">&lt; Previous</a>', pager.html.links_navigate(2, &:to_s)
+  end
+
+  def test_3_pages
+    pager = Pagify::ArrayPager.new([1,2,3,4,5], :per_page => 2)
+    assert_equal '&laquo; First <a href="2">2</a> <a href="3">Last &raquo;</a>', pager.html.links(1, &:to_s)
+    assert_equal '<a href="1">&laquo; First</a> 2 <a href="3">Last &raquo;</a>', pager.html.links(2, &:to_s)
+    assert_equal '<a href="1">&laquo; First</a> <a href="2">2</a> Last &raquo;', pager.html.links(3, &:to_s)
+
+    assert_equal '<a href="2">Next &gt;</a>', pager.html.links_navigate(1, &:to_s)
+    assert_equal '<a href="1">&lt; Previous</a> <a href="3">Next &gt;</a>', pager.html.links_navigate(2, &:to_s)
+    assert_equal '<a href="2">&lt; Previous</a>', pager.html.links_navigate(3, &:to_s)
   end
 
 end

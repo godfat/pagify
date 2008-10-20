@@ -30,16 +30,16 @@ module Pagify
         prev = if page > 1 && page_exists?(page - 1, size)
                  "<a href=\"#{yield(page - 1)}\"#{attrs}>#{setting[:prev_text]}</a>"
                else
-                 ''
+                 nil
                end
 
         post = if page < size && page_exists?(page + 1, size)
                  "<a href=\"#{yield(page + 1)}\"#{attrs}>#{setting[:next_text]}</a>"
                else
-                 ''
+                 nil
                end
 
-        prev + post
+        [prev, post].compact.join(setting[:separator])
       end
 
       def links page
