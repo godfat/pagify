@@ -24,15 +24,7 @@ module Pagify
         size = pager.size
         return [] if page < 1 || page > size
 
-        outer_prev, inner_prev, inner_post, outer_post = caculate_links(page, size)
-
-        # concat outer and inner, remove overlap
-        links_prev = outer_prev + [setting[:ellipsis]] + inner_prev
-        links_post = inner_post + [setting[:ellipsis]] + outer_post
-
-        # clean up overlap and remove '...' if there's overlap or no pages there
-        links_prev.delete(setting[:ellipsis]) if links_prev.uniq! || links_prev.size == 1
-        links_post.delete(setting[:ellipsis]) if links_post.uniq! || links_post.size == 1
+        links_prev, links_post = caculate_2_parts(*caculate_4_parts(page, size))
 
         current = links_prev.empty? && links_post.empty? ? [] : [page]
 
@@ -40,7 +32,29 @@ module Pagify
       end
 
       private
-      def caculate_links page, size
+      def caculate_2_parts outer_prev, inner_prev, inner_post, outer_post
+        [ caculate_prev(outer_prev, inner_prev),
+          caculate_post(inner_post, outer_post)  ]
+      end
+      def caculate_prev outer_prev, inner_prev
+        # concat outer and inner, remove overlap
+        links_prev = outer_prev + [setting[:ellipsis]] + inner_prev
+
+        # clean up overlap and remove '...' if there's overlap or no pages there
+        links_prev.delete(setting[:ellipsis]) if links_prev.uniq! || links_prev.size == 1
+
+        links_prev
+      end
+      def caculate_post inner_post, outer_post
+        # concat outer and inner, remove overlap
+        links_post = inner_post + [setting[:ellipsis]] + outer_post
+
+        # clean up overlap and remove '...' if there's overlap or no pages there
+        links_post.delete(setting[:ellipsis]) if links_post.uniq! || links_post.size == 1
+
+        links_post
+      end
+      def caculate_4_parts page, size
         inner_prev, inner_post = caculate_inner(setting[:inner_links], page, size)
         outer_prev, outer_post = caculate_outer(setting[:outer_links], page, size,
                                                 inner_prev, inner_post)
