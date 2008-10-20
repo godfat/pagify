@@ -46,7 +46,9 @@ module Pagify
         links_prev.delete(setting[:ellipsis]) if links_prev.uniq! || links_prev.size == 1
         links_post.delete(setting[:ellipsis]) if links_post.uniq! || links_post.size == 1
 
-        links_prev + [page] + links_post
+        current = links_prev.empty? && links_post.empty? ? [] : [page]
+
+        links_prev + current + links_post
       end
 
       private

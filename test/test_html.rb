@@ -110,22 +110,22 @@ class TestHTML < MiniTest::Unit::TestCase
 
   def test_no_page
     pager = Pagify::ArrayPager.new([1], :per_page => 10)
-    first_only pager
+    nothing_there pager
     pager.html.setting[:outer_links] = 10
-    first_only pager
+    nothing_there pager
     pager.html.setting[:inner_links] = 1
-    first_only pager
+    nothing_there pager
     pager.html.setting[:inner_links] = 5
-    first_only pager
+    nothing_there pager
   end
 
-  def first_only pager
-    assert_equal('&laquo; First', pager.html.links(1, &:to_s))
+  def nothing_there pager
+    assert_equal('', pager.html.links(1, &:to_s))
   end
 
   def test_nothing
     pager = Pagify::ArrayPager.new([1,2,3])
-    assert_equal '', pager.html.links_prev_next(1, &:to_s)
+    assert_equal '', pager.html.links_navigate(1, &:to_s)
   end
 
 end

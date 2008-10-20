@@ -20,10 +20,10 @@ module Pagify
       end
 
       def links_full page, &block
-        "#{links_prev_next(page, &block)}<br />\n#{links(page, &block)}"
+        "#{links_navigate(page, &block)}<br />\n#{links(page, &block)}"
       end
 
-      def links_prev_next page
+      def links_navigate page
         size = pager.size
         attrs = extract_html_attributes
 
