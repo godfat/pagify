@@ -20,11 +20,9 @@ module Pagify
       page = opts.delete(:page)
 
       pager = if pagify_cache
-                if pagify_pager && opts == pagify_pager.opts
-                  pagify_pager
-                else
-                  @pagify_pager = pagify_pager_create(self, opts)
-                end
+                @pagify_pager ||= pagify_pager_create(self, opts)
+                pagify_pager.opts = opts
+                pagify_pager
               else
                 pagify_pager_create(self, opts)
               end

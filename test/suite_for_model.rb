@@ -12,12 +12,10 @@ module SuiteForModel
 
     users2 = send(:User).pagify :page => 2, :per_page => 2
 
-    # same pager for same opts
+    # same pager
     assert_equal users1.pager.object_id, send(:User).pagify_pager.object_id
     assert_equal users2.pager.object_id, send(:User).pagify_pager.object_id
-
-    # opts changed, create a new pager
-    assert send(:User).pagify(:per_page => 1).pager.object_id != users1.pager.object_id
+    assert_equal send(:User).pagify(:per_page => 1).pager.object_id, users1.pager.object_id
 
     # there's cache
     assert send(:User).pagify_pager != nil
@@ -26,6 +24,7 @@ module SuiteForModel
     send(:User).pagify_cache = false
     assert_nil send(:User).pagify_pager
   ensure
+    # ensure we cleanup the cache.
     send(:User).pagify_cache = false
   end
 
