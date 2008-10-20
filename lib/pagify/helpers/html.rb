@@ -48,7 +48,11 @@ module Pagify
 
         prepare_links(page).map{ |i|
           if i == page
-            page == 1 ? setting[:first_text] : page
+            case page
+              when 1;    setting[:first_text]
+              when size; setting[ :last_text]
+              else;      page
+            end
           else
             case i
               when 1;      "<a href=\"#{yield(i)}\"#{attrs}>#{setting[:first_text]}</a>"

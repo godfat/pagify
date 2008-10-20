@@ -128,4 +128,10 @@ class TestHTML < MiniTest::Unit::TestCase
     assert_equal '', pager.html.links_navigate(1, &:to_s)
   end
 
+  def test_2_pages
+    pager = Pagify::ArrayPager.new([1,2,3], :per_page => 2)
+    assert_equal '&laquo; First <a href="2">Last &raquo;</a>', pager.html.links(1, &:to_s)
+    assert_equal '<a href="1">&laquo; First</a> Last &raquo;', pager.html.links(2, &:to_s)
+  end
+
 end

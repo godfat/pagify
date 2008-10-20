@@ -24,21 +24,9 @@ module Pagify
         size = pager.size
         return [] if page < 1 || page > size
 
-        # caculate index
-        inner_last  = setting[:outer_links] < size ? setting[:outer_links] : size
-        outer_begin = size - setting[:outer_links] + 1
-        outer_begin = 1 if outer_begin <= 0
+        outer_prev, inner_prev, inner_post, outer_post = caculate_links(page, size)
 
-        # caculate inner
-        inner_prev, inner_post = links_for_prev_and_post(setting[:inner_links], page, size)
-        outer_prev, outer_post = [ (           1 .. inner_last ).to_a,
-                                   ( outer_begin .. size       ).to_a  ]
-
-        # remove current page
-        outer_prev.delete(page)
-        outer_post.delete(page)
-
-        # concat outer and inner
+        # concat outer and inner, remove overlap
         links_prev = outer_prev + [setting[:ellipsis]] + inner_prev
         links_post = inner_post + [setting[:ellipsis]] + outer_post
 
@@ -52,9 +40,31 @@ module Pagify
       end
 
       private
-      def links_for_prev_and_post limit, page, size
+      def caculate_links page, size
+        inner_prev, inner_post = caculate_inner(setting[:inner_links], page, size)
+        outer_prev, outer_post = caculate_outer(setting[:outer_links], page, size,
+                                                inner_prev, inner_post)
+
+        [outer_prev, inner_prev, inner_post, outer_post]
+      end
+      def caculate_inner limit, page, size
         [ (1..limit).map{ |i| page_exists?(page - i, size) }.reverse.compact,
           (1..limit).map{ |i| page_exists?(page + i, size) }.compact          ]
+      end
+      def caculate_outer limit, page, size, inner_prev, inner_post
+        # caculate index
+        prev_last  = [limit,            (inner_prev.first || 1)   ].min
+        post_first = [size - limit + 1, (inner_post.last  || size)].max
+
+        # create outer
+        outer_prev, outer_post = [ (          1 .. prev_last ).to_a,
+                                   ( post_first .. size      ).to_a  ]
+
+        # remove current page
+        outer_prev.delete(page)
+        outer_post.delete(page)
+
+        [outer_prev, outer_post]
       end
       def page_exists? page, size
         if page >= 1 && page <= size
