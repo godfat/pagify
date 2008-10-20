@@ -39,7 +39,7 @@ module Pagify
       @counter  = opts[:counter]
 
       self.per_page  = opts[:per_page]  || 20
-      self.null_page = opts[:null_page] || false
+      self.null_page = opts[:null_page] || true
     end
 
     # return a null pager that stubs anything to 0

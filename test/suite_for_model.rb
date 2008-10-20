@@ -52,7 +52,7 @@ module SuiteForModel
     assert_equal 2, users.size
     assert_equal send(:User).first(:offset => 2), users.next.first
     assert_equal 1, users.next.size
-    assert_nil users.next.next
+    assert_equal Pagify::NullPage.instance.object_id, users.next.next.object_id
   end
 
   def test_condition_chain

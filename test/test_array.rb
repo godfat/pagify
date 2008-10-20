@@ -9,7 +9,7 @@ class TestArray < TestPagify
     pager.per_page = 5
     assert_equal 5, pager[1].size
     assert_equal 5, pager[2].size
-    assert_nil pager[3]
+    assert_equal Pagify::NullPage.instance.object_id,  pager[3].object_id
   end
 
   def test_for_array
