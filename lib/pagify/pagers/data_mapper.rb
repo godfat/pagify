@@ -6,7 +6,7 @@ module Pagify
   class DataMapperPager < BasicPager
     attr_reader :model
 
-    def initialize model_class, query = {}, opts = {}
+    def initialize model_class, opts = {}, query = {}
       @model = model_class
       query ||= {}
       query_opts = reject_pager_opts(opts)
