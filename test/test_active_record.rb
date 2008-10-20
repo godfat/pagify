@@ -2,7 +2,7 @@
 require 'test/helper'
 require 'test/suite_for_model'
 
-require 'pagify/ar'
+require 'pagify/active_record'
 
 require 'dm-core' # to help with active record to create database
 

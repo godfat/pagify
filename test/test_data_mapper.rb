@@ -2,7 +2,7 @@
 require 'test/helper'
 require 'test/suite_for_model'
 
-require 'pagify/dm'
+require 'pagify/data_mapper'
 
 class TestDataMapper < TestPagify
   def test_for_data_mapper

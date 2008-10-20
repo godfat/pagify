@@ -9,6 +9,8 @@ by Lin Jen-Shin (a.k.a. godfat-真常[http://godfat.org])
 
 == DESCRIPTION:
 
+  pagination tools for plain Ruby, DataMapper, ActiveRecord, and other ORM.
+
 == FEATURES:
 
 == SYNOPSIS:
