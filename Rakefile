@@ -12,8 +12,7 @@ PROJ.name = 'pagify'
 PROJ.ruby_opts.delete '-w'
 
 # PROJ.gem.dependencies << ['dm-core', '>=0.9.3']
-# PROJ.gem.executables = ['bin/pagify']
-# PROJ.gem.files = []
+# PROJ.gem.executables = ["bin/#{PROJ.name}"]
 
 task :default do
   Rake.application.options.show_task_pattern = /./
@@ -37,7 +36,8 @@ PROJ.rubyforge.name = 'ludy'
 PROJ.version = File.read("lib/#{PROJ.name}/version.rb").gsub(/.*VERSION = '(.*)'.*/m, '\1')
 
 PROJ.manifest_file = 'Manifest'
-PROJ.exclude += ['Manifest', '^tmp', 'tmp$', '^pkg', '.gitignore', '^ann-', '.sqlite3', '.db']
+PROJ.exclude += ['^Manifest$', '^tmp', 'tmp$', '^pkg',
+                 '^\.gitignore$', '^ann-', '\.sqlite3$', '\.db$']
 
 PROJ.rdoc.remote_dir = PROJ.name
 
