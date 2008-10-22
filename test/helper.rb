@@ -1,10 +1,9 @@
 
 require 'rubygems'
 require 'minitest/unit'
+MiniTest::Unit.autorun
 
 require 'pagify'
-
-MiniTest::Unit.autorun
 
 if Gem::Version.new(RUBY_VERSION) < Gem::Version.new('1.8.7')
   class Symbol

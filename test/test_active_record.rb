@@ -23,7 +23,7 @@ class TestActiveRecord < TestPagify
   end
 
   # i am tired with active record!!
-  DataMapper.setup :active_record, 'sqlite3:test/active_record.sqlite3'
+  DataMapper.setup :active_record, 'sqlite3:tmp/active_record.sqlite3'
   class UserForActiveRecord
     include DataMapper::Resource
     property :id, Serial
@@ -51,7 +51,7 @@ class TestActiveRecord < TestPagify
   end
 
   ActiveRecord::Base.establish_connection(
-    :adapter => 'sqlite3', :database => 'test/active_record.sqlite3')
+    :adapter => 'sqlite3', :database => 'tmp/active_record.sqlite3')
 
   class User < ActiveRecord::Base
     has_many :pets
