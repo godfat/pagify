@@ -64,7 +64,7 @@ module Pagify
     def page_exists? page
       page = normalize_page(page)
       offset = (page - 1) * per_page
-      page <= 0 || offset >= entries_count
+      page > 0 && offset < entries_count
     end
 
     # create page instance by page number.
@@ -72,14 +72,15 @@ module Pagify
     # nil would be returned. note, page start at 1, not zero.
     def page page
       if page_exists?(page)
+        return BasicPage.new(self, normalize_page(page))
+
+      else
         if null_page
           return BasicPage.null
         else
           return nil
         end
 
-      else
-        return BasicPage.new self, normalize_page(page)
       end
 
     end
