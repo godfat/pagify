@@ -20,10 +20,12 @@ module Pagify
       end
 
       def links_full page, &block
+        page = normalize_page(page)
         "#{links_navigate(page, &block)}<br />\n#{links(page, &block)}"
       end
 
       def links_navigate page
+        page = normalize_page(page)
         size = pager.size
         attrs = extract_html_attributes
 
@@ -43,6 +45,7 @@ module Pagify
       end
 
       def links page
+        page = normalize_page(page)
         size = pager.size
         attrs = extract_html_attributes
 
@@ -71,6 +74,10 @@ module Pagify
 
         attrs = ' ' + attrs if attrs != ''
         attrs
+      end
+
+      def normalize_page page
+        pager.__send__(:normalize_page, page)
       end
     end
     setup HTML

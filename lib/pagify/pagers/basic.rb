@@ -62,6 +62,7 @@ module Pagify
     alias_method :pages, :to_a
 
     def page_exists? page
+      page = normalize_page(page)
       offset = (page - 1) * per_page
       page <= 0 || offset >= entries_count
     end
@@ -78,7 +79,7 @@ module Pagify
         end
 
       else
-        return BasicPage.new self, page
+        return BasicPage.new self, normalize_page(page)
       end
 
     end
@@ -93,12 +94,18 @@ module Pagify
     # get the offset property about the page.
     # it is simply (page-1)*@per_page
     def offset page
-      (page - 1) * per_page
+      (normalize_page(page) - 1) * per_page
     end
 
     protected
     def reject_pager_opts opts
       opts.reject{ |key, value| [:per_page, :null_page].member?(key) }
     end
+
+    # do nothing for basic pager
+    def normalize_page page
+      page
+    end
+
   end
 end

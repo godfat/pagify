@@ -27,15 +27,6 @@ module Pagify
         }))
     end
 
-    def page n
-      if n.nil? || n == ''
-        n = 1
-      else
-        n = n.to_i
-      end
-      super(n)
-    end
-
   end
 
 end
