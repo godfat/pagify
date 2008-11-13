@@ -51,6 +51,12 @@ module SuiteForModel
     page_correctness '1'
   end
 
+  def test_nil_page_default_page_1
+    users = send(:User).pagify :page => nil, :per_page => 2
+    assert_equal 2, users.pager.size
+    assert_equal 1, users.page
+  end
+
   def page_correctness page
     users = send(:User).pagify :page => page, :per_page => 2
 

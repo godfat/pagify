@@ -10,6 +10,7 @@ module Pagify
   #  ActiveRecordPaginator.new Model, :order => 'created_at DESC'
   # would invoke Model.find :all, :offset => ?, :limit => ?, order => 'created_at DESC'
   class ActiveRecordPager < BasicPager
+    include PageAcceptStringOrBlank
     # the model class that you passed in this paginator
     attr_reader :model
 
@@ -26,8 +27,14 @@ module Pagify
         }))
     end
 
-    # it simply call super(page.to_i), so ActiveRecordPaginator also eat string.
-    def page page; super page.to_i; end
+    def page n
+      if n.nil? || n == ''
+        n = 1
+      else
+        n = n.to_i
+      end
+      super(n)
+    end
 
   end
 

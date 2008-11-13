@@ -4,6 +4,7 @@
 module Pagify
 
   class DataMapperPager < BasicPager
+    include PageAcceptStringOrBlank
     attr_reader :model
 
     def initialize model_class, opts = {}, query = {}
@@ -23,9 +24,6 @@ module Pagify
           end
         }))
     end
-
-    # it simply call super(page.to_i), so ActiveRecordPaginator also eat string.
-    def page page; super page.to_i; end
 
   end
 
