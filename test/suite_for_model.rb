@@ -43,8 +43,16 @@ module SuiteForModel
     assert users2.pager.object_id != send(:User).pagify_pager.object_id
   end
 
-  def test_page_correctness
-    users = send(:User).pagify :page => 1, :per_page => 2
+  def test_page_correctness_fixnum
+    page_correctness 1
+  end
+
+  def test_page_correctness_string
+    page_correctness '1'
+  end
+
+  def page_correctness page
+    users = send(:User).pagify :page => page, :per_page => 2
 
     assert_equal 2, users.pager.size
     assert_equal 1, users.page
