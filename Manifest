@@ -18,6 +18,7 @@ lib/pagify/pagers/active_record.rb
 lib/pagify/pagers/array.rb
 lib/pagify/pagers/basic.rb
 lib/pagify/pagers/data_mapper.rb
+lib/pagify/pagers/details/page_accept_string_or_blank.rb
 lib/pagify/pagifiers/abstract.rb
 lib/pagify/pagifiers/active_record.rb
 lib/pagify/pagifiers/array.rb
