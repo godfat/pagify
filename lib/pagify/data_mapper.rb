@@ -1,6 +1,10 @@
 
 # anything for data_mapper
 
+gem 'extlib', '<=0.9.8'
+gem 'dm-core', '<=0.9.7'
+gem 'dm-aggregates', '<=0.9.7'
+
 require 'dm-core'
 require 'dm-aggregates'
 
