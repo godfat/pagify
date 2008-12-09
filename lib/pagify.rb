@@ -7,6 +7,5 @@ module Pagify
   autoload :VERSION, 'pagify/version'
 end
 
-require 'pagify/pagers/basic'
-require 'pagify/basic_page'
+require 'pagify/basic'
 require 'pagify/null'
