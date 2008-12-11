@@ -4,6 +4,7 @@ require 'test/suite_for_model'
 
 require 'pagify/active_record'
 
+gem 'dm-core', '<=0.9.7'
 require 'dm-core' # to help with active record to create database
 
 class TestActiveRecord < TestPagify
