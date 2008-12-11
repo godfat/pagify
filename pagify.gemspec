@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Lin Jen-Shin (a.k.a. godfat \347\234\237\345\270\270)"]
-  s.date = %q{2008-12-09}
+  s.date = %q{2008-12-11}
   s.description = %q{pagination tools for plain Ruby, DataMapper, ActiveRecord, and other ORM.}
   s.email = %q{godfat (XD) godfat.org}
   s.extra_rdoc_files = ["CHANGES", "LICENSE", "NOTICE", "README", "TODO", "pagify.gemspec"]
@@ -27,13 +27,25 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_development_dependency(%q<bones>, [">= 2.1.0"])
+      s.add_development_dependency(%q<extlib>, ["<= 0.9.8"])
+      s.add_development_dependency(%q<dm-core>, ["<= 0.9.7"])
+      s.add_development_dependency(%q<dm-aggregates>, ["<= 0.9.7"])
+      s.add_development_dependency(%q<activerecord>, [">= 2.0.0"])
       s.add_development_dependency(%q<minitest>, [">= 1.3.0"])
     else
       s.add_dependency(%q<bones>, [">= 2.1.0"])
+      s.add_dependency(%q<extlib>, ["<= 0.9.8"])
+      s.add_dependency(%q<dm-core>, ["<= 0.9.7"])
+      s.add_dependency(%q<dm-aggregates>, ["<= 0.9.7"])
+      s.add_dependency(%q<activerecord>, [">= 2.0.0"])
       s.add_dependency(%q<minitest>, [">= 1.3.0"])
     end
   else
     s.add_dependency(%q<bones>, [">= 2.1.0"])
+    s.add_dependency(%q<extlib>, ["<= 0.9.8"])
+    s.add_dependency(%q<dm-core>, ["<= 0.9.7"])
+    s.add_dependency(%q<dm-aggregates>, ["<= 0.9.7"])
+    s.add_dependency(%q<activerecord>, [">= 2.0.0"])
     s.add_dependency(%q<minitest>, [">= 1.3.0"])
   end
 end
