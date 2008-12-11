@@ -33,28 +33,24 @@ module Pagify
 
       private
       def caculate_2_parts outer_prev, inner_prev, inner_post, outer_post
-        [ caculate_prev(outer_prev, inner_prev),
-          caculate_post(inner_post, outer_post)  ]
+        [ caculate_part(outer_prev, inner_prev),
+          caculate_part(inner_post, outer_post)  ]
       end
 
-      def caculate_prev outer_prev, inner_prev
-        # concat outer and inner, remove overlap
-        links_prev = outer_prev + [setting[:ellipsis]] + inner_prev
+      # concat outer and inner, remove overlap
+      def caculate_part left, right
+        # don't use ellipsis if there's no spaces between them
+        ellipsis = !left.empty? && (left.last + 1) == right.first ?
+          [] : [setting[:ellipsis]]
 
-        # clean up overlap and remove '...' if there's overlap or no pages there
-        links_prev.delete(setting[:ellipsis]) if links_prev.uniq! || links_prev.size == 1
+        part = left + ellipsis + right
 
-        links_prev
-      end
+        # clean up overlap and remove '...' if
+        part.delete(setting[:ellipsis]) if
+          part.uniq!     || # there's overlap
+          part.size == 1    # no pages there
 
-      def caculate_post inner_post, outer_post
-        # concat outer and inner, remove overlap
-        links_post = inner_post + [setting[:ellipsis]] + outer_post
-
-        # clean up overlap and remove '...' if there's overlap or no pages there
-        links_post.delete(setting[:ellipsis]) if links_post.uniq! || links_post.size == 1
-
-        links_post
+        part
       end
 
       def caculate_4_parts page, size
@@ -66,8 +62,22 @@ module Pagify
       end
 
       def caculate_inner limit, page, size
-        [ (1..limit).map{ |i| page_exists?(page - i, size) }.reverse.compact,
-          (1..limit).map{ |i| page_exists?(page + i, size) }.compact          ]
+        prev, post = page - limit, page + limit
+
+        left   = extract_pages(  prev      ... page, size )
+        right  = extract_pages( (page + 1) ..  post, size )
+
+        # adding more right pages if left pages were not enough.
+        right.push(
+          *extract_pages(
+            (post + 1) .. (post + limit - left.size),  size )) if left.size < limit
+
+        # ditto
+        left.unshift(
+          *extract_pages(
+            (prev - limit - right.size) .. (prev - 1), size )) if right.size < limit
+
+        [left, right]
       end
 
       def caculate_outer limit, page, size, inner_prev, inner_post
@@ -85,6 +95,11 @@ module Pagify
 
         [outer_prev, outer_post]
       end
+
+      def extract_pages range, size
+        range.map{ |i| page_exists?(i, size) }.compact
+      end
+
       def page_exists? page, size
         if page >= 1 && page <= size
           page

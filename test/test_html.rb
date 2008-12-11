@@ -166,4 +166,21 @@ class TestHTML < MiniTest::Unit::TestCase
     assert_equal '<a href="2">&lt; Previous</a>', pager.html.links_navigate(3, &:to_s)
   end
 
+  def test_more_pages_to_left_or_right
+    pager = Pagify::ArrayPager.new((1..33).to_a, :per_page => 3)
+
+    first = ['&laquo; First', '<a href="1">&laquo; First</a>']
+    last  = ['Last &raquo;',  '<a href="11">Last &raquo;</a>']
+
+    (1..11).each{ |page|
+      expected = (2..10).map{ |i| i == page ? i.to_s : "<a href=\"#{i}\">#{i}</a>" }
+
+      expected.unshift( page == 1  ? first.first : first.last )
+      expected.push(    page == 11 ?  last.first :  last.last )
+
+      assert_equal expected.join(' '), pager.html.links(page, &:to_s)
+    }
+
+  end
+
 end
