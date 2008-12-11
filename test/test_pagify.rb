@@ -8,18 +8,20 @@ class TestPagify < MiniTest::Unit::TestCase
     pager.per_page = 10
     assert_equal 11, pager.size
 
-    assert_equal Pagify::NullPage.instance.object_id, pager[0].object_id
+    null_page = Pagify::NullPage.new(pager)
+
+    assert_equal null_page, pager[0]
     assert_equal((0..9).to_a, pager.page(1).to_a)
     assert_equal((10..19).to_a, pager[2].to_a)
     assert_equal(20, pager.page(3).first)
     assert_equal((90..99).to_a, pager[10].to_a)
     assert_equal([100], pager.page(11).to_a)
-    assert_equal Pagify::NullPage.instance.object_id, pager.page(12).object_id
+    assert_equal null_page, pager.page(12)
 
     assert_equal(pager[1], pager[2].prev)
     assert_equal(pager.page(11), pager[10].next)
-    assert_equal Pagify::NullPage.instance.object_id, pager[1].prev.object_id
-    assert_equal Pagify::NullPage.instance.object_id, pager[10].next.next.object_id
+    assert_equal null_page, pager[1].prev
+    assert_equal Pagify::NullPage.new(pager), pager[10].next.next
 
     assert_equal pager[4].data, pager[4].fetch
     assert_equal(pager[1], pager.pages.first)

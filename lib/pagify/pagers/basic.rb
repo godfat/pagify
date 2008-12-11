@@ -42,9 +42,6 @@ module Pagify
       self.null_page = opts[:null_page] || true
     end
 
-    # return a null pager that stubs anything to 0
-    def self.null; NullPager.instance; end
-
     # if two paginators are equal, then the properties of
     # per_page, fetcher, counter are all equal.
     def == rhs
@@ -76,7 +73,7 @@ module Pagify
 
       else
         if null_page
-          return BasicPage.null
+          return null_page_instance
         else
           return nil
         end
@@ -106,6 +103,11 @@ module Pagify
     # do nothing for basic pager
     def normalize_page page
       page
+    end
+
+    # return a null pager that stubs anything to 0
+    def null_page_instance
+      @null_page_instance ||= NullPage.new(self)
     end
 
   end

@@ -1,5 +1,29 @@
 = pagify changes history
 
+==
+policy changed. null page was no longer a singleton. see reason below:
+
+  i encountered a strange problem, where:
+    
+    pager[10].pager.per_page != pager[1].pager.per_page
+  
+  because BasicPage#pager would refer to original pager,
+  while NullPage#pager would always refer to NullPager's singleton.
+
+  i think i should have not made NullPage be a singleton,
+  because we got have some way to keep page.pager.per_page
+  consist to the value we original setup. then we could write
+  something like this:
+
+    (0...page.pager.per_page).each{ ... }
+
+  that is, we don't have to keep pager around, and if you have
+  page, then you have pager. so now that NullPage was no longer
+  a singleton, and null_page.pager would return the original pager.
+
+  keep NullPager being a singleton though, and it should always
+  return the same page which refer the singleton null pager.
+
 == pagify 0.5 / 2008-10-11
 
 * 1 major enhancement

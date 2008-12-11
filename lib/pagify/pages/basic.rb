@@ -18,9 +18,6 @@ module Pagify
     # don't create a page instance yourself unless you have to
     def initialize pager, page; @pager, @page = pager, page; end
 
-    # return a null page that stubs anything to 0
-    def self.null; NullPage.instance; end
-
     # return the page instance next to this page
     def next; pager.page(page + 1); end
 
