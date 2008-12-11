@@ -36,6 +36,7 @@ module Pagify
         [ caculate_prev(outer_prev, inner_prev),
           caculate_post(inner_post, outer_post)  ]
       end
+
       def caculate_prev outer_prev, inner_prev
         # concat outer and inner, remove overlap
         links_prev = outer_prev + [setting[:ellipsis]] + inner_prev
@@ -45,6 +46,7 @@ module Pagify
 
         links_prev
       end
+
       def caculate_post inner_post, outer_post
         # concat outer and inner, remove overlap
         links_post = inner_post + [setting[:ellipsis]] + outer_post
@@ -54,6 +56,7 @@ module Pagify
 
         links_post
       end
+
       def caculate_4_parts page, size
         inner_prev, inner_post = caculate_inner(setting[:inner_links], page, size)
         outer_prev, outer_post = caculate_outer(setting[:outer_links], page, size,
@@ -61,10 +64,12 @@ module Pagify
 
         [outer_prev, inner_prev, inner_post, outer_post]
       end
+
       def caculate_inner limit, page, size
         [ (1..limit).map{ |i| page_exists?(page - i, size) }.reverse.compact,
           (1..limit).map{ |i| page_exists?(page + i, size) }.compact          ]
       end
+
       def caculate_outer limit, page, size, inner_prev, inner_post
         # caculate index
         prev_last  = [limit,            (inner_prev.first || 1)   ].min
