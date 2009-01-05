@@ -11,9 +11,8 @@ PROJ.name = 'pagify'
 # supress warnings, there's too many warnings in dm-core
 PROJ.ruby_opts.delete '-w'
 
-PROJ.gem.development_dependencies << ['extlib', '<=0.9.8']
-PROJ.gem.development_dependencies << ['dm-core', '<=0.9.7']
-PROJ.gem.development_dependencies << ['dm-aggregates', '<=0.9.7']
+PROJ.gem.development_dependencies << ['dm-core', '>=0.9.9']
+PROJ.gem.development_dependencies << ['dm-aggregates', '>=0.9.9']
 
 PROJ.gem.development_dependencies << ['activerecord', '>=2.0.0']
 PROJ.gem.development_dependencies << ['minitest', '>=1.3.0']
