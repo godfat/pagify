@@ -30,19 +30,16 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<dm-core>, [">= 0.9.9"])
       s.add_development_dependency(%q<dm-aggregates>, [">= 0.9.9"])
       s.add_development_dependency(%q<activerecord>, [">= 2.0.0"])
-      s.add_development_dependency(%q<minitest>, [">= 1.3.0"])
     else
       s.add_dependency(%q<bones>, [">= 2.2.0"])
       s.add_dependency(%q<dm-core>, [">= 0.9.9"])
       s.add_dependency(%q<dm-aggregates>, [">= 0.9.9"])
       s.add_dependency(%q<activerecord>, [">= 2.0.0"])
-      s.add_dependency(%q<minitest>, [">= 1.3.0"])
     end
   else
     s.add_dependency(%q<bones>, [">= 2.2.0"])
     s.add_dependency(%q<dm-core>, [">= 0.9.9"])
     s.add_dependency(%q<dm-aggregates>, [">= 0.9.9"])
     s.add_dependency(%q<activerecord>, [">= 2.0.0"])
-    s.add_dependency(%q<minitest>, [">= 1.3.0"])
   end
 end

@@ -1,7 +1,7 @@
 
 require 'test/helper'
 
-class TestNull < MiniTest::Unit::TestCase
+class TestNull < TestCase
   def test_null_pager
     nullpage = Pagify::NullPager.instance.page(0)
     assert_equal 0, nullpage.page

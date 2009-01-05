@@ -1,7 +1,7 @@
 
 require 'test/helper'
 
-class TestPagify < MiniTest::Unit::TestCase
+class TestPagify < TestCase
   def self.data; @data ||= (0..100).to_a; end
   def for_pager pager
     # assume data.size is 101, data is [0,1,2,3...]

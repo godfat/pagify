@@ -3,7 +3,7 @@ require 'test/helper'
 
 require 'pagify/helpers/html'
 
-class TestHTML < MiniTest::Unit::TestCase
+class TestHTML < TestCase
   # def test_page_and_pager_has_same_html
   #   pager = Pagify::ArrayPager.new [1]
   #   assert_equal pager.html.object_id, pager[1].html.object_id
