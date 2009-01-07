@@ -1,4 +1,8 @@
 = pagify todo list
 
+* cooperate with DataMapper::Collection,
+  do user.pets.pagify work???
+  why test work, but not in my app?
+
 * refactor setting!!
 * merb and rails url helper
