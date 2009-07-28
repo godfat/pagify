@@ -100,13 +100,13 @@ by Lin Jen-Shin (a.k.a. godfat-真常[http://godfat.org])
 
 == INSTALL:
 
-* sudo gem install pagify
+* gem install pagify
 
 == LICENSE:
 
 Apache License 2.0
 
-Copyright (c) 2008, Lin Jen-Shin (a.k.a. godfat 真常)
+Copyright (c) 2008, Lin Jen-Shin (aka godfat 真常)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

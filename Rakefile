@@ -4,7 +4,7 @@ require 'bones'
 Bones.setup
 
 PROJ.name = 'pagify'
-PROJ.authors = 'Lin Jen-Shin (a.k.a. godfat 真常)'
+PROJ.authors = 'Lin Jen-Shin (aka godfat 真常)'
 PROJ.email = 'godfat (XD) godfat.org'
 PROJ.url = "http://github.com/godfat/#{PROJ.name}"
 PROJ.rubyforge.name = 'ludy'
