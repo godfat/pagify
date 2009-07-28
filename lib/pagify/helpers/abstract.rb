@@ -3,7 +3,7 @@ module Pagify
   module Helpers
     class Abstract
       def self.default_attributes
-        raise NotImplementedError
+        {}
       end
 
       def self.setting

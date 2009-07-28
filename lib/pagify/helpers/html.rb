@@ -8,6 +8,7 @@ module Pagify
   module Helpers
     class HTML < Abstract
       def self.default_attributes
+        super.merge(
         {  :first_text => '&laquo; First',
             :last_text =>          'Last &raquo;',
             :prev_text => '&lt; Previous',
@@ -16,7 +17,7 @@ module Pagify
           :outer_links => 2,
         #        :step => 3,
           :separator   => ' ',
-          :ellipsis    => '...' }
+          :ellipsis    => '...' })
       end
 
       def links_full page, &block
