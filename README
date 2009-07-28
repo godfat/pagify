@@ -1,5 +1,5 @@
-= pagify 0.5
-by Lin Jen-Shin (a.k.a. godfat-真常[http://godfat.org])
+= pagify 0.6
+by Lin Jen-Shin (aka godfat-真常[http://godfat.org])
   godfat (XD) godfat.org
 
 == LINKS:
@@ -9,20 +9,30 @@ by Lin Jen-Shin (a.k.a. godfat-真常[http://godfat.org])
 
 == DESCRIPTION:
 
- pagination tools for plain Ruby, DataMapper, ActiveRecord, and other ORM.
+ Pagination tools for Array(or custom class), DataMapper and ActiveRecord
 
 == FEATURES:
 
-* aims to be as flexible as possible
-* separate intrusive "pagify" method and Array/DataMapper/ActiveRecord Pager.
-* separate view helpers. there's html helper, yaml helper(planed), xml/rss/atom helper(planed).
+* Aims to be as flexible as possible
+* Separate intrusive "pagify" method and Array/DataMapper/ActiveRecord Pager.
+* Separate view helpers. There's only html helper right now.
 
 == SYNOPSIS:
 
- the easiest (but not recommended) way to use it is:
+ # for fast will_paginate replacement:
+ require 'pagify/active_record'
+ require 'pagify/helper/rails'
 
+ # in controller:
+ @photos = Photo.pagify(:page => params[:page])
+
+ # in view:
+ would_paginate(@photos)
+
+
+
+ # basic DataMapper usage:
  require 'pagify/data_mapper'
- require 'pagify/helpers/html'
 
  class User
    include DataMapper::Resource
@@ -43,17 +53,21 @@ by Lin Jen-Shin (a.k.a. godfat-真常[http://godfat.org])
 
  User.get(1).pets.pagify                 # => create a page contains pets owned by user 1
 
+
+
+ # basic html helper usage:
+ require 'pagify/helper/html'
+
  # create a string with page links.
  Pet.pagify.pager.html.links(params[:page]){ |page|
    # the block result would be used as url for each page
    "/pets/list?page=#{page}"
  }
 
- Pagify::Helpers::HTML.setting[:prev_text] = '<]' # globally change html setting
+ Pagify::Helper::HTML.setting[:prev_text] = '<]' # globally change html setting
  # NOTE: if you would like to use instance level setting, you shouldn't use method pagify,
- # NOTE: or use User.pagify_cache = true; and face thread-safety problem.
-
- and the recommended usage is:
+ # NOTE: new your own DataMapperPager or so to remember instance level html setting.
+ # NOTE: for example, see below:
 
  class Pet
  # same as above
@@ -70,8 +84,7 @@ by Lin Jen-Shin (a.k.a. godfat-真常[http://godfat.org])
    end
  end
 
- then you would use Pet.page(3) or user.pets.page(2) without encountering
- thread-safety problem or create a whole new pager in each request.
+ # then you would use Pet.page(3) or user.pets.page(2) to retrieve data
 
  # this would create next/prev links only.
  Pet.page(1).html.links_navigate{ |page|
@@ -83,17 +96,18 @@ by Lin Jen-Shin (a.k.a. godfat-真常[http://godfat.org])
    "/pets/show?page=#{page}"
  }
 
- and you can build your pager from scratch via BasicPager.
- e.g. BasicPager.new :fetcher => lambda{|*a|[]}, :counter => lambda{0}
- this would be similar to Pagify::NullPager.
+ # and you can build your pager from scratch via BasicPager.
+ # e.g. BasicPager.new :fetcher => lambda{|*a|[]}, :counter => lambda{0}
+ # this would be similar to Pagify::NullPager.
 
- you can disable null page via passing :null_page => false to any pager,
- or set pager.null_page = false; anytime.
+ # you can disable null page via passing :null_page => false to any pager,
+ # or set pager.null_page = false; anytime.
 
- see example or test for more examples (and use case for ActiveRecordPager).
+ # see example or test for more examples (and use case for ActiveRecordPager).
 
 == REQUIREMENTS:
 
+* ruby 1.8+ or 1.9.1
 * for Basic/Array  Pager: only ruby is needed
 * for DataMapper   Pager: dm-core and dm-aggregates 0.9.6 and above
 * for ActiveRecord Pager: activerecord 2.1.1 and above
