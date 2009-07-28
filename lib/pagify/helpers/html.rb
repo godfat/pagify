@@ -22,7 +22,7 @@ module Pagify
 
       def links_full page, &block
         page = normalize_page(page)
-        "#{links_navigate(page, &block)}<br />\n#{links(page, &block)}"
+        "#{links_navigate(page, &block)}<br />#{links(page, &block)}"
       end
 
       def links_navigate page
