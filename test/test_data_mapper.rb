@@ -40,7 +40,7 @@ class TestDataMapper < TestPagify
     include DataMapper::Resource
     property :id, Serial
     property :name, String
-    belongs_to :user
+    belongs_to :user, :nullable => true
   end
 
   User.auto_migrate!

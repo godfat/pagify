@@ -22,30 +22,27 @@ class TestActiveRecord < TestPagify
     end
   end
 
-  # i am tired with active record!!
   DataMapper.setup :active_record, 'sqlite3:tmp/active_record.sqlite3'
+
   class UserForActiveRecord
     include DataMapper::Resource
-    property :id, Serial
-    property :name, String
     def self.default_repository_name
       :active_record
     end
-    # why can't i use:
-    storage_name = 'users'
-    # end why
+    property :id, Serial
+    property :name, String
     storage_names[default_repository_name] = 'users'
     auto_migrate!
   end
 
   class PetForActiveRecord
     include DataMapper::Resource
-    property :id, Serial
-    property :name, String
-    property :user_id, Integer
     def self.default_repository_name
       :active_record
     end
+    property :id, Serial
+    property :name, String
+    property :user_id, Integer, :nullable => true
     storage_names[default_repository_name] = 'pets'
     auto_migrate!
   end
