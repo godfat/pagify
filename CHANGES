@@ -1,9 +1,13 @@
 = pagify changes history
 
+== pagify 1.0 / ?
+ * first rubyforge gem release!
+
 == pagify 0.6 / 2009
  * rearranged require call.
+ * use normal form for dir and module name
  * removed pagify pager cache, it's not useful
- * added rails helper
+ * added rails helper (i.e. would_pagiante)
 
 ==
 policy changed. null page was no longer a singleton. see reason below:
