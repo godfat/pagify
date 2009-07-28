@@ -1,5 +1,9 @@
 = pagify changes history
 
+== pagify 0.6 / 2009
+ * rearranged require call.
+ * removed pagify pager cache, it's not useful
+
 ==
 policy changed. null page was no longer a singleton. see reason below:
 
