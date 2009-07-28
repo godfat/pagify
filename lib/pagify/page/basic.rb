@@ -52,5 +52,5 @@ module Pagify
       end
     end
 
-  end
-end
+  end # of BasicPage
+end # of Pagify

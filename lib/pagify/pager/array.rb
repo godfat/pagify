@@ -17,6 +17,5 @@ module Pagify
           data.size
         }))
     end
-
-  end
-end
+  end # of ArrayPager
+end # of Pagify

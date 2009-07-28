@@ -26,7 +26,5 @@ module Pagify
           model.count(query_opts)
         }))
     end
-
-  end
-
-end
+  end # of ActiveRecordPager
+end # of Pagify

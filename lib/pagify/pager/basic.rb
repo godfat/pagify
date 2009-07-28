@@ -110,5 +110,5 @@ module Pagify
       @null_page_instance ||= NullPage.new(self)
     end
 
-  end
-end
+  end # of BasicPager
+end # of Pagify

@@ -80,7 +80,7 @@ module Pagify
       def normalize_page page
         pager.__send__(:normalize_page, page)
       end
-    end
+    end # of HTML
     setup HTML
-  end
-end
+  end # of Helper
+end # of Pagify

@@ -6,5 +6,5 @@ module Pagify
       page = opts.delete(:page)
       pagify_pager_create(self, opts).page(page)
     end
-  end
-end
+  end # of Pagifier
+end # of Pagify

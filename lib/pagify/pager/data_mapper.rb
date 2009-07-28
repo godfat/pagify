@@ -25,6 +25,5 @@ module Pagify
         }))
     end
 
-  end
-
-end
+  end # of DataMapperPager
+end # of Pagify

@@ -49,6 +49,6 @@ module Pagify
         {}
       end
 
-    end
-  end
-end
+    end # of Setting
+  end # of Helper
+end # of Pagify

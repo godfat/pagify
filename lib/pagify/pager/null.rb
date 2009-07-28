@@ -1,6 +1,5 @@
 
 module Pagify
-
   # a null paginator that stubs any page into a null page.
   class NullPager < BasicPager
     include Singleton
@@ -12,6 +11,5 @@ module Pagify
     def normalize_page n
       0
     end
-  end
-
+  end # of NullPager
 end # of Pagify

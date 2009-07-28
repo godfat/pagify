@@ -9,6 +9,5 @@ module Pagify
         n = n.to_i
       end
     end
-  end
-
-end
+  end # of PageAcceptStringOrBlank
+end # of Pagify
