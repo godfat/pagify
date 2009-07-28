@@ -1,6 +1,4 @@
 
-require 'test/helper'
-
 class TestPagify < TestCase
   def self.data; @data ||= (0..100).to_a; end
   def for_pager pager

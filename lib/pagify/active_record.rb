@@ -1,8 +1,6 @@
 
 # anything for active_record
 
-require 'active_record'
-
 require 'pagify'
 require 'pagify/pagers/details/page_accept_string_or_blank'
 

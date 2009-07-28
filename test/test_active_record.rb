@@ -1,10 +1,9 @@
 
 require 'test/helper'
-require 'test/suite_for_model'
+require 'test/helper_pagify'
+require 'test/helper_model'
 
 require 'pagify/active_record'
-
-require 'dm-core' # to help with active record to create database
 
 class TestActiveRecord < TestPagify
   def test_for_active_record
@@ -22,7 +21,7 @@ class TestActiveRecord < TestPagify
     end
   end
 
-  DataMapper.setup :active_record, 'sqlite3:tmp/active_record.sqlite3'
+  DataMapper.setup(:active_record, 'sqlite3:tmp/active_record.sqlite3')
 
   class UserForActiveRecord
     include DataMapper::Resource

@@ -1,6 +1,7 @@
 
 require 'test/helper'
-require 'test/suite_for_model'
+require 'test/helper_pagify'
+require 'test/helper_model'
 
 require 'pagify/data_mapper'
 

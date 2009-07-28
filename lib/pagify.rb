@@ -5,5 +5,10 @@ module Pagify
   autoload  :ActiveRecordPager, 'pagify/active_record'
 end
 
-require 'pagify/basic'
-require 'pagify/null'
+require 'pagify/pagers/basic'
+require 'pagify/pages/basic'
+
+require 'singleton'
+
+require 'pagify/pagers/null'
+require 'pagify/pages/null'
