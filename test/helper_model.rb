@@ -1,45 +1,6 @@
 
 module SuiteForModel
 
-  def test_cache_for_pager
-    send(:User).pagify_cache = true
-
-    users1 = send(:User).pagify :page => 1, :per_page => 2
-    pager = send(:User).pagify_pager
-
-    users2 = send(:User).pagify :page => 2, :per_page => 2
-
-    # same pager
-    assert_equal users1.pager.object_id, send(:User).pagify_pager.object_id
-    assert_equal users2.pager.object_id, send(:User).pagify_pager.object_id
-    assert_equal send(:User).pagify(:per_page => 1).pager.object_id, users1.pager.object_id
-
-    # there's cache
-    assert send(:User).pagify_pager != nil
-
-    # cleanup cache
-    send(:User).pagify_cache = false
-    assert_nil send(:User).pagify_pager
-  ensure
-    # ensure we cleanup the cache.
-    send(:User).pagify_cache = false
-  end
-
-  def test_no_cache_for_pager
-    assert_nil send(:User).pagify_pager
-
-    users1 = send(:User).pagify :page => 1, :per_page => 2
-    pager = send(:User).pagify_pager
-
-    users2 = send(:User).pagify :page => 2, :per_page => 2
-
-    assert_nil send(:User).pagify_pager
-
-    # not same pager for same opts
-    assert users1.pager.object_id != send(:User).pagify_pager.object_id
-    assert users2.pager.object_id != send(:User).pagify_pager.object_id
-  end
-
   def test_page_correctness_fixnum
     page_correctness 1
   end
