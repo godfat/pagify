@@ -1,5 +1,5 @@
 
-require 'pagify/pagifiers/abstract'
+require 'pagify/pagifier/abstract'
 
 module DataMapper
   module Model

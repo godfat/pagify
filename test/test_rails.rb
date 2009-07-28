@@ -1,7 +1,7 @@
 
 require 'test/helper'
 require 'pagify/array'
-require 'pagify/helpers/rails'
+require 'pagify/helper/rails'
 
 class TestRails < TestCase
   include ApplicationHelper
@@ -13,7 +13,7 @@ class TestRails < TestCase
   end
 
   def test_query_name
-    assert_equal(:page, Pagify::Helpers::HTML.setting[:query_name])
+    assert_equal(:page, Pagify::Helper::HTML.setting[:query_name])
     assert_equal(:page, Pagify::ArrayPager.new([]).html.setting[:query_name])
   end
 

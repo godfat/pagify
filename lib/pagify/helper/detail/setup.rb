@@ -1,6 +1,6 @@
 
 module Pagify
-  module Helpers
+  module Helper
     def self.setup helper_class
       Pagify::BasicPager.module_eval do
         helper_name = helper_class.to_s.downcase[/::?(\w+)$/, 1]

@@ -2,10 +2,10 @@
 # anything for active_record
 
 require 'pagify'
-require 'pagify/pagers/details/page_accept_string_or_blank'
+require 'pagify/pager/detail/page_accept_string_or_blank'
 
-require 'pagify/pagers/active_record'
-require 'pagify/pagifiers/active_record'
+require 'pagify/pager/active_record'
+require 'pagify/pagifier/active_record'
 
 require 'pagify/array' # this was needed for active_record...
 

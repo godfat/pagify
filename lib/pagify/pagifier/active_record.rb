@@ -1,5 +1,5 @@
 
-require 'pagify/pagifiers/abstract'
+require 'pagify/pagifier/abstract'
 
 [ActiveRecord::Base, ActiveRecord::Associations::AssociationCollection].each{ |klass|
   klass.module_eval do

@@ -1,7 +1,7 @@
 
 require 'test/helper'
 
-require 'pagify/helpers/html'
+require 'pagify/helper/html'
 
 class TestHTML < TestCase
   # def test_page_and_pager_has_same_html
@@ -12,7 +12,7 @@ class TestHTML < TestCase
   def test_html
     pager1 = Pagify::ArrayPager.new []
     assert_equal ' ', pager1.html.setting[:separator]
-    assert_equal Pagify::Helpers::HTML.object_id, pager1.html.class.object_id
+    assert_equal Pagify::Helper::HTML.object_id, pager1.html.class.object_id
 
     pager1.html.setting[:separator] = 'XD'
     assert_equal 'XD', pager1.html.setting[:separator]

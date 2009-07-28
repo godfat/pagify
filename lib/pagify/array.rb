@@ -2,5 +2,5 @@
 # anything for array
 
 require 'pagify'
-require 'pagify/pagers/array'
-require 'pagify/pagifiers/array'
+require 'pagify/pager/array'
+require 'pagify/pagifier/array'

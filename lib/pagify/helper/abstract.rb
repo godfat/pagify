@@ -1,6 +1,6 @@
 
 module Pagify
-  module Helpers
+  module Helper
     class Abstract
       def self.default_attributes
         {}

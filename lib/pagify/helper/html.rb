@@ -1,11 +1,11 @@
 
-require 'pagify/helpers/abstract'
+require 'pagify/helper/abstract'
 
-require 'pagify/helpers/details/setting'
-require 'pagify/helpers/details/setup'
+require 'pagify/helper/detail/setting'
+require 'pagify/helper/detail/setup'
 
 module Pagify
-  module Helpers
+  module Helper
     class HTML < Abstract
       def self.default_attributes
         super.merge(

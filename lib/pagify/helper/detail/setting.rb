@@ -1,8 +1,8 @@
 
-require 'pagify/helpers/abstract'
+require 'pagify/helper/abstract'
 
 module Pagify
-  module Helpers
+  module Helper
     # TODO: refactor me!!
     class Setting
       def initialize helper, parent = {}
