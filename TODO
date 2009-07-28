@@ -1,5 +1,6 @@
 = pagify todo list
 
+* default chinese html setting
 * update README for better understanding, in use case
 * cooperate with DataMapper::Collection,
   do user.pets.pagify work???
