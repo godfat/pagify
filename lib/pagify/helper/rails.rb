@@ -12,11 +12,12 @@ class Pagify::Helper::HTML
 end
 
 module ApplicationHelper
-  def would_paginate objs
+  def would_paginate objs, &path
+    path = lambda{ request.path } unless block_given?
     html = objs.pager.html
     name = html.setting[:query_name]
     "<div class=\"#{html.setting[:wrapper_class]}\">" +
-    html.links_full(params[name]){ |p| request.path + "?#{name}=#{p}" } +
+    html.links_full(params[name]){ |p| path.call + "?#{name}=#{p}" } +
     '</div>'
   end
 end
