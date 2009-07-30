@@ -8,6 +8,8 @@
  * use normal form for dir and module name
  * removed pagify pager cache, it's not useful
  * added rails helper (i.e. would_pagiante)
+ * fixed that NullPage from pagers other than NullPager,
+   it should always acts as an empty array.
 
 ==
 policy changed. null page was no longer a singleton. see reason below:
