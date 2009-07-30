@@ -1,7 +1,10 @@
 = pagify todo list
 
-* default chinese html setting
+== current
 * update README for better understanding, in use case
+
+== 1.0+
+* default chinese html setting
 * cooperate with DataMapper::Collection,
   do user.pets.pagify work???
   why test work, but not in my app?
