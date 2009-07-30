@@ -4,6 +4,7 @@ module Pagify
   class NullPage < BasicPage
     def initialize pager = NullPager.instance, page = 0
       super(pager, page)
+      @data = []
     end
   end
 end
