@@ -11,7 +11,7 @@ PROJ.rubyforge.name = 'ludy'
 
 PROJ.gem.development_dependencies << ['dm-core',       '>=0.9.9'] <<
                                      ['dm-aggregates', '>=0.9.9'] <<
-                                     ['activerecord',  '>=2.0.0']
+                                     ['activerecord',  '>=2.1.1']
 
 # supress warnings, there's too many warnings in dm-core
 PROJ.ruby_opts.delete '-w'
