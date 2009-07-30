@@ -1,9 +1,9 @@
 = pagify changes history
 
 == pagify 1.0 / ?
- * first rubyforge gem release!
 
-== pagify 0.6 / 2009
+== pagify 0.6.1 / 2009-07-30
+ * first rubyforge gem release!
  * rearranged require call.
  * use normal form for dir and module name
  * removed pagify pager cache, it's not useful
