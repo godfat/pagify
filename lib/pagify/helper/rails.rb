@@ -16,8 +16,9 @@ module ApplicationHelper
     path = lambda{ request.path } unless block_given?
     html = objs.pager.html
     name = html.setting[:query_name]
+    base = path.call
     "<div class=\"#{html.setting[:wrapper_class]}\">" +
-    html.links_full(params[name]){ |p| path.call + "?#{name}=#{p}" } +
+    html.links_full(params[name]){ |p| base + "?#{name}=#{p}" } +
     '</div>'
   end
 end
