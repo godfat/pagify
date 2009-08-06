@@ -108,9 +108,9 @@ by Lin Jen-Shin (aka godfat-真常[http://godfat.org])
 == REQUIREMENTS:
 
 * ruby 1.8+ or 1.9.1+
-* for Basic/Array  Pager: only ruby is needed
-* for DataMapper   Pager: dm-core and dm-aggregates 0.9.9+
-* for ActiveRecord Pager: activerecord 2.1.1+
+* for  Basic/ArrayPager: only ruby is needed
+* for   DataMapperPager: dm-core and dm-aggregates 0.9.9+
+* for ActiveRecordPager: activerecord 2.1.1+
 
 == INSTALL:
 
