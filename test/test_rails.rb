@@ -24,6 +24,10 @@ class TestRails < TestCase
 
   def test_would_paginate
     assert_equal('<div class="pagination"><a href="/a/b?page=2">&lt; Previous</a> <a href="/a/b?page=4">Next &gt;</a><br /><a href="/a/b?page=1">&laquo; First</a> <a href="/a/b?page=2">2</a> 3 <a href="/a/b?page=4">4</a> <a href="/a/b?page=5">Last &raquo;</a></div>', would_paginate(@data))
+
+    @data.pager.html.setting[:links_type] = :links
+
+    assert_equal('<div class="pagination"><a href="/a/b?page=1">&laquo; First</a> <a href="/a/b?page=2">2</a> 3 <a href="/a/b?page=4">4</a> <a href="/a/b?page=5">Last &raquo;</a></div>', would_paginate(@data))
   end
 
   def test_custom_path
