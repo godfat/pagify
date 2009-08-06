@@ -2,7 +2,7 @@
 
 == pagify 1.0 / ?
 
-== pagify 0.6.2 / 2009-08-06
+== pagify 0.6.2 / ?
  * added a links_type option for rails helper,
    telling which html helper method you would like.
    default to HTML#links_full
