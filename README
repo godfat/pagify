@@ -27,7 +27,7 @@ by Lin Jen-Shin (aka godfat-真常[http://godfat.org])
  @photos = Photo.pagify(:page => params[:page])
 
  # in view:
- would_paginate(@photos)
+ pagify_links(@photos)
 
 
 

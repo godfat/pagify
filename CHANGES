@@ -3,6 +3,7 @@
 == pagify 1.0 / ?
 
 == pagify 0.6.2 / ?
+ * no joke now, use pagify_links instead of would_paginate.
  * added a links_type option for rails helper,
    telling which html helper method you would like.
    default to HTML#links_full

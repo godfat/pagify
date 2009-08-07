@@ -13,7 +13,7 @@ class Pagify::Helper::HTML
 end
 
 module ApplicationHelper
-  def would_paginate objs, &path
+  def pagify_links objs, &path
     path = lambda{ request.path } unless block_given?
     html = objs.pager.html
     name = html.setting[:query_name]
@@ -23,4 +23,6 @@ module ApplicationHelper
       html.send(type, params[name]){ |p| base + "?#{name}=#{p}" } +
     '</div>'
   end
+
+  alias_method :would_paginate, :pagify_links
 end
