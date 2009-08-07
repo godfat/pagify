@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{pagify}
-  s.version = "0.6.1"
+  s.version = "0.6.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Lin Jen-Shin (aka godfat \347\234\237\345\270\270)"]
-  s.date = %q{2009-07-30}
+  s.date = %q{2009-08-08}
   s.description = %q{ Pagination tools for Array(or custom class), DataMapper and ActiveRecord}
   s.email = %q{godfat (XD) godfat.org}
   s.extra_rdoc_files = ["CHANGES", "LICENSE", "NOTICE", "README", "TODO", "pagify.gemspec"]
@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=utf-8", "--inline-source", "--line-numbers", "--promiscuous", "--main", "README"]
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{ludy}
-  s.rubygems_version = %q{1.3.4}
+  s.rubygems_version = %q{1.3.5}
   s.summary = %q{Pagination tools for Array(or custom class), DataMapper and ActiveRecord}
   s.test_files = ["test/test_active_record.rb", "test/test_array.rb", "test/test_basic.rb", "test/test_data_mapper.rb", "test/test_html.rb", "test/test_null.rb", "test/test_rails.rb"]
 
@@ -27,17 +27,17 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<bones>, [">= 2.5.1"])
       s.add_development_dependency(%q<dm-core>, [">= 0.9.9"])
       s.add_development_dependency(%q<dm-aggregates>, [">= 0.9.9"])
-      s.add_development_dependency(%q<activerecord>, [">= 2.0.0"])
+      s.add_development_dependency(%q<activerecord>, [">= 2.1.1"])
     else
       s.add_dependency(%q<bones>, [">= 2.5.1"])
       s.add_dependency(%q<dm-core>, [">= 0.9.9"])
       s.add_dependency(%q<dm-aggregates>, [">= 0.9.9"])
-      s.add_dependency(%q<activerecord>, [">= 2.0.0"])
+      s.add_dependency(%q<activerecord>, [">= 2.1.1"])
     end
   else
     s.add_dependency(%q<bones>, [">= 2.5.1"])
     s.add_dependency(%q<dm-core>, [">= 0.9.9"])
     s.add_dependency(%q<dm-aggregates>, [">= 0.9.9"])
-    s.add_dependency(%q<activerecord>, [">= 2.0.0"])
+    s.add_dependency(%q<activerecord>, [">= 2.1.1"])
   end
 end

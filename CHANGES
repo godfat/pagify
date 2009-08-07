@@ -2,7 +2,7 @@
 
 == pagify 1.0 / ?
 
-== pagify 0.6.2 / ?
+== pagify 0.6.2 / 2009-08-08
  * no joke now, use pagify_links instead of would_paginate.
  * now you can define your own pagify_links and call super
    in ApplicationHelper.
