@@ -19,7 +19,7 @@ class TestDataMapper < TestPagify
         TestPagify.data[opts[:offset], opts[:limit]]
       end
       def query
-        nil
+        {}
       end
       private
       def with_scope query
