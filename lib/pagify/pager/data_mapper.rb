@@ -9,7 +9,6 @@ module Pagify
 
     def initialize model_class, opts = {}, query = {}
       @model = model_class
-      query ||= {}
       query_opts = reject_pager_opts(opts)
 
       super(opts.merge(
