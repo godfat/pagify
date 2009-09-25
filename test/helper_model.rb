@@ -22,7 +22,7 @@ module SuiteForModel
     assert_equal 1, users.page
     assert_equal send(:User).first, users.first
     assert_equal 2, users.size
-    assert_equal send(:User).first(:offset => 2, :limit => 1), users.next.first
+    assert_equal send(:User).first(:offset => 2), users.next.first
     assert_equal 1, users.next.size
     assert_equal Pagify::NullPage.new(users.pager), users.next.next
   end
