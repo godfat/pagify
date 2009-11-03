@@ -11,8 +11,6 @@ TestCase = begin
            end
 
 require 'pagify'
-#gem 'dm-core', '<0.10'
-#gem 'dm-aggregates', '<0.10'
 require 'dm-core'
 require 'dm-aggregates'
 require 'active_record'

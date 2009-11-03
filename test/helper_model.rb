@@ -65,19 +65,4 @@ module SuiteForModel
     end
   end
 
-  # include Extlib::Hook
-  #
-  # private
-  # def i_give_up
-  #   if self.class == TestActiveRecord
-  #     skip "it's toooooo hard to implement this for active record!! patch wanted!"
-  #   end
-  # end
-  #
-  # [:test_same_pager_with_same_opts,
-  #  :test_page_correctness,
-  #  :test_condition_chain].each{ |test|
-  #   before test.to_sym, :i_give_up
-  # }
-
 end
