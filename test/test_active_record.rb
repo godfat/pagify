@@ -5,7 +5,7 @@ require 'test/helper_model'
 
 require 'pagify/active_record'
 
-class TestActiveRecord < TestPagify
+class TestActiveRecord < PagifyCase
   def test_for_active_record
     for_pager Pagify::ActiveRecordPager.new(Topic)
   end
@@ -16,7 +16,7 @@ class TestActiveRecord < TestPagify
         101
       end
       def find all, opts = {}
-        TestPagify.data[opts[:offset], opts[:limit]]
+        PagifyCase.data[opts[:offset], opts[:limit]]
       end
     end
   end

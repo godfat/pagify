@@ -1,5 +1,5 @@
 
-class TestPagify < TestCase
+class PagifyCase < TestCase
   def test_silent_unit_test_in_ruby18
   end
 

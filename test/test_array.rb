@@ -2,7 +2,7 @@
 require 'test/helper'
 require 'test/helper_pagify'
 
-class TestArray < TestPagify
+class TestArray < PagifyCase
   def test_offset_bug
     a = (0..9).to_a
     pager = Pagify::ArrayPager.new a
@@ -13,7 +13,7 @@ class TestArray < TestPagify
   end
 
   def test_for_array
-    for_pager Pagify::ArrayPager.new(TestPagify.data)
+    for_pager Pagify::ArrayPager.new(PagifyCase.data)
   end
 
 end
