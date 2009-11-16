@@ -1,16 +1,11 @@
 
-require 'pagify/helper/html'
+require 'pagify/helper/detail/web'
 
 module Pagify::Helper::Innate
+  include Pagify::Helper::Web
   def pagify_links objs, &path
-    path = lambda{ request.path } unless block_given?
-    html = objs.pager.html
-    name = html.setting[:query_name]
-    type = html.setting[:links_type]
-    base = path.call
-    "<div class=\"#{html.setting[:wrapper_class]}\">" +
-      html.send(type, request[name]){ |p| base + "?#{name}=#{p}" } +
-    '</div>'
+    super(objs, :path => lambda{ block_given? ? path.call : request.path  },
+                :page => lambda{ |name| request[name] })
   end
 end
 
