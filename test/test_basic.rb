@@ -2,7 +2,8 @@
 require 'test/helper'
 require 'test/helper_pagify'
 
-class TestBasic < PagifyCase
+class TestBasic < TestCase
+  include PagifyCase
   def test_basic
     pager = Pagify::BasicPager.new(
       :fetcher => lambda{ |offset, per_page|

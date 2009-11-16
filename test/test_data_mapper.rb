@@ -5,7 +5,8 @@ require 'test/helper_model'
 
 require 'pagify/data_mapper'
 
-class TestDataMapper < PagifyCase
+class TestDataMapper < TestCase
+  include PagifyCase
   def test_for_data_mapper
     for_pager Pagify::DataMapperPager.new(Topic)
   end

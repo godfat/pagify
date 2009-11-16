@@ -2,7 +2,8 @@
 require 'test/helper'
 require 'test/helper_pagify'
 
-class TestArray < PagifyCase
+class TestArray < TestCase
+  include PagifyCase
   def test_offset_bug
     a = (0..9).to_a
     pager = Pagify::ArrayPager.new a

@@ -5,7 +5,8 @@ require 'test/helper_model'
 
 require 'pagify/active_record'
 
-class TestActiveRecord < PagifyCase
+class TestActiveRecord < TestCase
+  include PagifyCase
   def test_for_active_record
     for_pager Pagify::ActiveRecordPager.new(Topic)
   end
