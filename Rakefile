@@ -11,9 +11,9 @@ PROJ.email = 'godfat (XD) godfat.org'
 PROJ.url = "http://github.com/godfat/#{PROJ.name}"
 PROJ.rubyforge.name = 'ludy'
 
-PROJ.gem.development_dependencies << ['dm-core',       '>=0.9.9'] <<
-                                     ['dm-aggregates', '>=0.9.9'] <<
-                                     ['activerecord',  '>=2.1.1']
+PROJ.gem.development_dependencies << ['dm-core',       '>=0.10.1'] <<
+                                     ['dm-aggregates', '>=0.10.1'] <<
+                                     ['activerecord',  '>=2.3.4']
 
 # supress warnings, there's too many warnings in dm-core
 PROJ.ruby_opts.delete '-w'
