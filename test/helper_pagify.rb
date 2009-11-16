@@ -1,5 +1,8 @@
 
 class TestPagify < TestCase
+  def test_silent_unit_test_in_ruby18
+  end
+
   def self.data; @data ||= (0..100).to_a; end
   def for_pager pager
     # assume data.size is 101, data is [0,1,2,3...]
