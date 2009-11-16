@@ -17,7 +17,10 @@ module Pagify
           :outer_links => 2,
         #        :step => 3,
           :separator   => ' ',
-          :ellipsis    => '...' })
+          :ellipsis    => '...',
+          :query_name  => :page,
+          :links_type  => :links_full,
+          :wrapper_class => 'pagination' })
       end
 
       def links_full page, &block
