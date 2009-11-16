@@ -1,4 +1,4 @@
-= pagify 0.6.2
+= pagify 0.7.0
 by Lin Jen-Shin (aka godfat-真常[http://godfat.org])
   godfat (XD) godfat.org
 
@@ -10,16 +10,18 @@ by Lin Jen-Shin (aka godfat-真常[http://godfat.org])
 == DESCRIPTION:
 
  Pagination tools for Array(or custom class), DataMapper and ActiveRecord
+ Helpers for Innate/Ramaze and Rails included.
 
 == FEATURES:
 
 * Aims to be as flexible as possible
 * Separate intrusive "pagify" method and Array/DataMapper/ActiveRecord Pager.
 * Separate view helpers. There's only html helper right now.
+* Web framework specific helper included. Currently for Innate/Ramaze and Rails.
 
 == SYNOPSIS:
 
- # for fast will_paginate replacement:
+ # for fast Rails will_paginate replacement:
  require 'pagify/active_record'
  require 'pagify/helper/rails'
 
@@ -28,6 +30,20 @@ by Lin Jen-Shin (aka godfat-真常[http://godfat.org])
 
  # in view:
  pagify_links(@photos)
+
+
+
+ # for Innate/Ramaze:
+ require 'pagify'
+ require 'pagify/helper/innate'
+
+ # in controller, say you want pagify helper:
+ class Controller < Ramaze::Controller
+   helper :pagify
+ end
+
+ # for the data part, see DataMapperPager or ActiveRecordPager
+ # in view, same as in Rails
 
 
 
@@ -109,8 +125,9 @@ by Lin Jen-Shin (aka godfat-真常[http://godfat.org])
 
 * ruby 1.8+ or 1.9.1+
 * for  Basic/ArrayPager: only ruby is needed
-* for   DataMapperPager: dm-core and dm-aggregates 0.9.9+
-* for ActiveRecordPager: activerecord 2.1.1+
+* for   DataMapperPager: dm-core and dm-aggregates 0.10.1+
+* for ActiveRecordPager: activerecord 2.3.4+
+* for     Innate helper: innate 2009.07+
 
 == INSTALL:
 
