@@ -1,6 +1,8 @@
 = pagify changes history
 
-== pagify 1.0 / ?
+== pagify 0.7.0 / 2009-11-16
+ * added innate helper.
+ * some internal refactoring
 
 == pagify 0.6.2 / 2009-08-08
  * no joke now, use pagify_links instead of would_paginate.
