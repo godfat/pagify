@@ -8,12 +8,12 @@ end
 
 ensure_in_path 'lib'
 proj = 'pagify'
+require "#{proj}/version"
 
 Bones{
-  require "#{proj}/version"
   version Pagify::VERSION
 
-  # ruby_opts [''] # silence warning, too many in addressable and/or dm-core
+  ruby_opts [''] # silence warning, too many in addressable and/or dm-core
   depend_on 'dm-core',       :development => true, :version => '>=0.10.1'
   depend_on 'dm-aggregates', :development => true, :version => '>=0.10.1'
   depend_on 'activerecord',  :development => true, :version => '>=2.3.4'
