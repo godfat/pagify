@@ -8,7 +8,7 @@ module Pagify
   # call Page#fetch
   class BasicPage
     # prvent Page#to_a return [#<Page:0x12345>]
-    undef_method :to_a if Gem::Version.new(RUBY_VERSION) < Gem::Version.new('1.9.0')
+    undef_method :to_a if RUBY_VERSION < '1.9.0'
 
     # pager to get the original pager; page to get the number of this page
     attr_reader :pager, :page

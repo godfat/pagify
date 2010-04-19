@@ -15,7 +15,7 @@ require 'dm-core'
 require 'dm-aggregates'
 require 'active_record'
 
-if Gem::Version.new(RUBY_VERSION) < Gem::Version.new('1.8.7')
+if RUBY_VERSION < '1.8.7'
   class Symbol
     def to_proc
       lambda{ |*args| args.shift.__send__(self, *args) }
