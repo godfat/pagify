@@ -42,7 +42,7 @@ class TestDataMapper < TestCase
     include DataMapper::Resource
     property :id, Serial
     property :name, String
-    belongs_to :user, :nullable => true
+    belongs_to :user, :required => false
   end
 
   User.auto_migrate!

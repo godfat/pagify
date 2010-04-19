@@ -42,7 +42,7 @@ class TestActiveRecord < TestCase
     end
     property :id, Serial
     property :name, String
-    property :user_id, Integer, :nullable => true
+    property :user_id, Integer, :required => false
     storage_names[default_repository_name] = 'pets'
     auto_migrate!
   end
