@@ -1,5 +1,9 @@
 = pagify changes history
 
+== pagify 0.7.1 / 2010-04-26
+ * fix the problem that RUBY_VERSION is forzen,
+   just use lexical string comparsion then.
+
 == pagify 0.7.0 / 2009-11-16
  * added innate helper.
  * some internal refactoring
