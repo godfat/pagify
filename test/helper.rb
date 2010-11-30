@@ -14,11 +14,3 @@ require 'pagify'
 require 'dm-core'
 require 'dm-aggregates'
 require 'active_record'
-
-if RUBY_VERSION < '1.8.7'
-  class Symbol
-    def to_proc
-      lambda{ |*args| args.shift.__send__(self, *args) }
-    end
-  end
-end
