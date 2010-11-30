@@ -13,4 +13,5 @@ TestCase = begin
 require 'pagify'
 require 'dm-core'
 require 'dm-aggregates'
+require 'dm-migrations'
 require 'active_record'

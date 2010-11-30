@@ -15,7 +15,10 @@ Bones{
 
   ruby_opts [''] # silence warning, too many in addressable and/or dm-core
   depend_on 'dm-core',       :development => true, :version => '>=0.10.1'
-  depend_on 'dm-aggregates', :development => true, :version => '>=0.10.1'
+  depend_on 'dm-aggregates', :development => true
+  depend_on 'dm-migrations', :development => true
+  depend_on 'dm-sqlite-adapter', :development => true
+
   depend_on 'activerecord',  :development => true, :version => '>=2.3.4'
 
   name    proj
