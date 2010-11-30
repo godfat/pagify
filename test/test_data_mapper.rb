@@ -1,7 +1,14 @@
 
-require 'test/helper'
-require 'test/helper_pagify'
-require 'test/helper_model'
+
+if respond_to?(:require_relative, true)
+  require_relative 'helper'
+  require_relative 'helper_pagify'
+  require_relative 'helper_model'
+else
+  require 'test/helper'
+  require 'test/helper_pagify'
+  require 'test/helper_model'
+end
 
 require 'pagify/data_mapper'
 

@@ -1,5 +1,9 @@
 
-require 'test/helper'
+if respond_to?(:require_relative, true)
+  require_relative 'helper'
+else
+  require 'test/helper'
+end
 
 class TestNull < TestCase
   def test_null_pager

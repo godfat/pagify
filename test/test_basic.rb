@@ -1,6 +1,11 @@
 
-require 'test/helper'
-require 'test/helper_pagify'
+if respond_to?(:require_relative, true)
+  require_relative 'helper'
+  require_relative 'helper_pagify'
+else
+  require 'test/helper'
+  require 'test/helper_pagify'
+end
 
 class TestBasic < TestCase
   include PagifyCase
