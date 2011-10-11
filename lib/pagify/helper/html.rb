@@ -20,6 +20,7 @@ module Pagify
           :ellipsis    => '...',
           :query_name  => :page,
           :links_type  => :links_full,
+          :active_class  => 'active',
           :wrapper_class => 'pagination' })
       end
 
@@ -56,9 +57,9 @@ module Pagify
         prepare_links(page).map{ |i|
           if i == page
             case page
-              when 1;    setting[:first_text]
-              when size; setting[ :last_text]
-              else;      page
+              when 1;    "<div class=\"#{setting[:active_class]}\" style=\"display: inline;\">#{setting[:first_text]}</div>"
+              when size; "<div class=\"#{setting[:active_class]}\" style=\"display: inline;\">#{setting[ :last_text]}</div>"
+              else;      "<div class=\"#{setting[:active_class]}\" style=\"display: inline;\">#{page}</div>"
             end
           else
             case i
