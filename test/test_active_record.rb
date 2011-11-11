@@ -11,6 +11,18 @@ end
 
 require 'pagify/active_record'
 
+require 'tempfile'
+db = Tempfile.new('pagify')
+db.close
+
+require 'sqlite3/sqlite3_native'
+require 'sqlite3'
+
+DataMapper.setup(:active_record, "sqlite3:#{db.path}")
+
+ActiveRecord::Base.establish_connection(
+  :adapter => 'sqlite3', :database => db.path)
+
 class TestActiveRecord < TestCase
   include PagifyCase
   def test_for_active_record
@@ -27,8 +39,6 @@ class TestActiveRecord < TestCase
       end
     end
   end
-
-  DataMapper.setup(:active_record, 'sqlite3:tmp/active_record.sqlite3')
 
   class UserForActiveRecord
     include DataMapper::Resource
@@ -53,9 +63,6 @@ class TestActiveRecord < TestCase
     auto_migrate!
   end
 
-  ActiveRecord::Base.establish_connection(
-    :adapter => 'sqlite3', :database => 'tmp/active_record.sqlite3')
-
   class User < ActiveRecord::Base
     has_many :pets
   end
@@ -69,5 +76,4 @@ class TestActiveRecord < TestCase
   def all_pets_with_name_godfat user
     user.pets.all(:conditions => ['name = ?', 'godfat'])
   end
-
 end
