@@ -57,7 +57,7 @@ class TestHTML < TestCase
     pager = Pagify::ArrayPager.new((1..1000).to_a, :per_page => 10)
     users = pager[50]
 
-    assert_equal(#'<a href="49">&lt; Previous</a> 50 <a href="51">Next &gt;</a><br />'+
+    assert_equal(#'<a href="49">&lt; Previous</a> 50 <a href="51">Next &gt;</a><br/>'+
                  '<a href="1">&laquo; First</a> ' +
                  '<a href="2">2</a> ' + # outer links
                  # '... ' +
@@ -93,7 +93,7 @@ class TestHTML < TestCase
     pager.html.setting[:ellipsis] = 'zzz'
     users = pager[50]
 
-    assert_equal(#'<a href="49">&lt; Previous</a> 50 <a href="51">Next &gt;</a><br />'+
+    assert_equal(#'<a href="49">&lt; Previous</a> 50 <a href="51">Next &gt;</a><br/>'+
                  '<a href="1" class="pagify">&laquo; First</a>,,' +
                  '<a href="2" class="pagify">2</a>,,' + # outer links
                  'zzz,,' +
