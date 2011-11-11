@@ -20,6 +20,8 @@ module Pagify
           :ellipsis    => '...',
           :query_name  => :page,
           :links_type  => :links_full,
+          :active_class  => 'active',
+          :first_last  => true,
           :wrapper_class => 'pagination' })
       end
 
@@ -56,14 +58,14 @@ module Pagify
         prepare_links(page).map{ |i|
           if i == page
             case page
-              when 1;    setting[:first_text]
-              when size; setting[ :last_text]
-              else;      page
+              when 1;    "<div class=\"#{setting[:active_class]}\" style=\"display: inline;\">#{setting[:first_last] ? setting[:first_text] : i}</div>"
+              when size; "<div class=\"#{setting[:active_class]}\" style=\"display: inline;\">#{setting[:first_last] ? setting[ :last_text] : i}</div>"
+              else;      "<div class=\"#{setting[:active_class]}\" style=\"display: inline;\">#{i}</div>"
             end
           else
             case i
-              when 1;      "<a href=\"#{yield(i)}\"#{attrs}>#{setting[:first_text]}</a>"
-              when size;   "<a href=\"#{yield(i)}\"#{attrs}>#{setting[ :last_text]}</a>"
+              when 1;      "<a href=\"#{yield(i)}\"#{attrs}>#{setting[:first_last] ? setting[:first_text] : i}</a>"
+              when size;   "<a href=\"#{yield(i)}\"#{attrs}>#{setting[:first_last] ? setting[ :last_text] : i}</a>"
               when Fixnum; "<a href=\"#{yield(i)}\"#{attrs}>#{i}</a>"
               else;        i.to_s
             end
