@@ -5,7 +5,7 @@ by Lin Jen-Shin ([godfat](http://godfat.org))
 ## LINKS:
 
 * [github](https://github.com/godfat/pagify)
-* [rubygems](http://rubygems.org/gems/pagify)
+* [rubygems](https://rubygems.org/gems/pagify)
 * [rdoc](http://rdoc.info/github/godfat/pagify)
 
 ## DESCRIPTION:
