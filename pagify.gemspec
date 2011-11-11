@@ -2,23 +2,23 @@
 
 Gem::Specification.new do |s|
   s.name = "pagify"
-  s.version = "0.7.1"
+  s.version = "0.8.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Lin Jen-Shin (godfat)"]
-  s.date = "2011-11-11"
-  s.description = ""
+  s.date = "2011-11-12"
+  s.description = "Pagination tools for Array(or custom class), DataMapper and ActiveRecord.\nHelpers for Innate/Ramaze and Rails included."
   s.email = ["godfat (XD) godfat.org"]
   s.files = [
   ".gitignore",
   ".gitmodules",
-  "CHANGES",
+  "CHANGES.md",
+  "CONTRIBUTORS",
   "Gemfile",
   "LICENSE",
-  "NOTICE",
-  "README",
+  "README.md",
   "Rakefile",
-  "TODO",
+  "TODO.md",
   "lib/pagify.rb",
   "lib/pagify/active_record.rb",
   "lib/pagify/array.rb",
@@ -45,8 +45,6 @@ Gem::Specification.new do |s|
   "lib/pagify/version.rb",
   "misc.txt",
   "pagify.gemspec",
-  "spec/pagify_spec.rb",
-  "spec/spec_helper.rb",
   "task/.gitignore",
   "task/gemgem.rb",
   "test/helper.rb",
@@ -64,7 +62,7 @@ Gem::Specification.new do |s|
   s.homepage = "https://github.com/godfat/pagify"
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.11"
-  s.summary = ""
+  s.summary = "Pagination tools for Array(or custom class), DataMapper and ActiveRecord."
   s.test_files = [
   "test/test_active_record.rb",
   "test/test_array.rb",
