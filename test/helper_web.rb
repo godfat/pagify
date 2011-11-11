@@ -10,14 +10,14 @@ module WebCase
   end
 
   def test_pagify_links
-    assert_equal('<div class="pagination"><a href="/a/b?page=2">&lt; Previous</a> <a href="/a/b?page=4">Next &gt;</a><br /><a href="/a/b?page=1">&laquo; First</a> <a href="/a/b?page=2">2</a> 3 <a href="/a/b?page=4">4</a> <a href="/a/b?page=5">Last &raquo;</a></div>', pagify_links(@data))
+    assert_equal('<div class="pagination"><a href="/a/b?page=2" class="pagination_inactive">&lt; Previous</a> <a href="/a/b?page=4" class="pagination_inactive">Next &gt;</a><br/><a href="/a/b?page=1" class="pagination_inactive">&laquo; First</a> <a href="/a/b?page=2" class="pagination_inactive">2</a> <span class="pagination_active">3</span> <a href="/a/b?page=4" class="pagination_inactive">4</a> <a href="/a/b?page=5" class="pagination_inactive">Last &raquo;</a></div>', pagify_links(@data))
 
     @data.pager.html.setting[:links_type] = :links
 
-    assert_equal('<div class="pagination"><a href="/a/b?page=1">&laquo; First</a> <a href="/a/b?page=2">2</a> 3 <a href="/a/b?page=4">4</a> <a href="/a/b?page=5">Last &raquo;</a></div>', pagify_links(@data))
+    assert_equal('<div class="pagination"><a href="/a/b?page=1" class="pagination_inactive">&laquo; First</a> <a href="/a/b?page=2" class="pagination_inactive">2</a> <span class="pagination_active">3</span> <a href="/a/b?page=4" class="pagination_inactive">4</a> <a href="/a/b?page=5" class="pagination_inactive">Last &raquo;</a></div>', pagify_links(@data))
   end
 
   def test_custom_path
-    assert_equal('<div class="pagination"><a href="XD?page=2">&lt; Previous</a> <a href="XD?page=4">Next &gt;</a><br /><a href="XD?page=1">&laquo; First</a> <a href="XD?page=2">2</a> 3 <a href="XD?page=4">4</a> <a href="XD?page=5">Last &raquo;</a></div>', pagify_links(@data){'XD'})
+    assert_equal('<div class="pagination"><a href="XD?page=2" class="pagination_inactive">&lt; Previous</a> <a href="XD?page=4" class="pagination_inactive">Next &gt;</a><br/><a href="XD?page=1" class="pagination_inactive">&laquo; First</a> <a href="XD?page=2" class="pagination_inactive">2</a> <span class="pagination_active">3</span> <a href="XD?page=4" class="pagination_inactive">4</a> <a href="XD?page=5" class="pagination_inactive">Last &raquo;</a></div>', pagify_links(@data){'XD'})
   end
 end

@@ -20,9 +20,9 @@ module Pagify
           :ellipsis    => '...',
           :query_name  => :page,
           :links_type  => :links_full,
-          :active_class  => 'active',
-          :first_last  => true,
-          :wrapper_class => 'pagination' })
+          :inactive_class => 'pagination_inactive',
+          :active_class   => 'pagination_active',
+          :wrapper_class  => 'pagination' })
       end
 
       def links_full page, &block
@@ -53,21 +53,22 @@ module Pagify
       def links page
         page = normalize_page(page)
         size = pager.size
-        attrs = extract_html_attributes
+        a    = extract_html_attributes
 
         prepare_links(page).map{ |i|
           if i == page
             case page
-              when 1;    "<div class=\"#{setting[:active_class]}\" style=\"display: inline;\">#{setting[:first_last] ? setting[:first_text] : i}</div>"
-              when size; "<div class=\"#{setting[:active_class]}\" style=\"display: inline;\">#{setting[:first_last] ? setting[ :last_text] : i}</div>"
-              else;      "<div class=\"#{setting[:active_class]}\" style=\"display: inline;\">#{i}</div>"
+              when 1   ; wrap_active(setting[:first_text] || i)
+              when size; wrap_active(setting[ :last_text] || i)
+              else     ; wrap_active(i)
             end
           else
             case i
-              when 1;      "<a href=\"#{yield(i)}\"#{attrs}>#{setting[:first_last] ? setting[:first_text] : i}</a>"
-              when size;   "<a href=\"#{yield(i)}\"#{attrs}>#{setting[:first_last] ? setting[ :last_text] : i}</a>"
-              when Fixnum; "<a href=\"#{yield(i)}\"#{attrs}>#{i}</a>"
-              else;        i.to_s
+              when 1   ; wrap_inactive(setting[:first_text] || i, a){yield(i)}
+              when size; wrap_inactive(setting[ :last_text] || i, a){yield(i)}
+              when Fixnum
+                         wrap_inactive(i, a){yield(i)}
+              else     ; i.to_s
             end
           end
         }.join(setting[:separator])
@@ -75,7 +76,9 @@ module Pagify
 
       private
       def extract_html_attributes
-        attrs = setting.additional_attributes.
+        attrs = {:class => setting[:inactive_class]}.
+                  merge(setting.additional_attributes).
+                  select{ |_, value| value }.
                   map{ |key, value| "#{key}=\"#{value}\"" }.join(' ')
 
         attrs = ' ' + attrs if attrs != ''
@@ -84,6 +87,14 @@ module Pagify
 
       def normalize_page page
         pager.__send__(:normalize_page, page)
+      end
+
+      def wrap_active label
+        %Q{<span class="#{setting[:active_class]}">#{label}</span>}
+      end
+
+      def wrap_inactive label, attr
+        %Q{<a href="#{yield}"#{attr}>#{label}</a>}
       end
     end # of HTML
     setup HTML

@@ -56,6 +56,7 @@ class TestHTML < TestCase
 
     pager = Pagify::ArrayPager.new((1..1000).to_a, :per_page => 10)
     users = pager[50]
+    pager.html.setting[:class] = nil
 
     assert_equal(#'<a href="49">&lt; Previous</a> 50 <a href="51">Next &gt;</a><br/>'+
                  '<a href="1">&laquo; First</a> ' +
@@ -70,7 +71,7 @@ class TestHTML < TestCase
                  '<a href="47">47</a> ' +
                  '<a href="48">48</a> ' +
                  '<a href="49">49</a> ' +
-                 '50 ' +
+                 '<span class="pagination_active">50</span> ' +
                  '<a href="51">51</a> ' +
                  '<a href="52">52</a> ' +
                  '<a href="53">53</a> ' +
@@ -101,7 +102,7 @@ class TestHTML < TestCase
                  '<a href="47" class="pagify">47</a>,,' +
                  '<a href="48" class="pagify">48</a>,,' +
                  '<a href="49" class="pagify">49</a>,,' +
-                 '50,,' +
+                 '<span class="pagination_active">50</span>,,' +
                  '<a href="51" class="pagify">51</a>,,' +
                  '<a href="52" class="pagify">52</a>,,' +
                  '<a href="53" class="pagify">53</a>,,' +
@@ -143,8 +144,11 @@ class TestHTML < TestCase
 
   def test_2_pages
     pager = Pagify::ArrayPager.new([1,2,3], :per_page => 2)
-    assert_equal '&laquo; First <a href="2">Last &raquo;</a>', pager.html.links(1, &:to_s)
-    assert_equal '<a href="1">&laquo; First</a> Last &raquo;', pager.html.links(2, &:to_s)
+    pager.html.setting[:inactive_class] = nil
+    pager.html.setting[:active_class] = nil
+
+    assert_equal '<span class="">&laquo; First</span> <a href="2">Last &raquo;</a>', pager.html.links(1, &:to_s)
+    assert_equal '<a href="1">&laquo; First</a> <span class="">Last &raquo;</span>', pager.html.links(2, &:to_s)
 
     assert_equal '<a href="2">Next &gt;</a>', pager.html.links_navigate(1, &:to_s)
     assert_equal '<a href="1">&lt; Previous</a>', pager.html.links_navigate(2, &:to_s)
@@ -152,14 +156,16 @@ class TestHTML < TestCase
 
   def test_3_pages
     pager = Pagify::ArrayPager.new([1,2,3,4,5], :per_page => 2)
+    pager.html.setting[:class] = nil
+    pager.html.setting[:active_class] = 'a'
 
-    assert_equal '&laquo; First <a href="2">2</a> <a href="3">Last &raquo;</a>',
+    assert_equal '<span class="a">&laquo; First</span> <a href="2">2</a> <a href="3">Last &raquo;</a>',
       pager.html.links(1, &:to_s)
 
-    assert_equal '<a href="1">&laquo; First</a> 2 <a href="3">Last &raquo;</a>',
+    assert_equal '<a href="1">&laquo; First</a> <span class="a">2</span> <a href="3">Last &raquo;</a>',
       pager.html.links(2, &:to_s)
 
-    assert_equal '<a href="1">&laquo; First</a> <a href="2">2</a> Last &raquo;',
+    assert_equal '<a href="1">&laquo; First</a> <a href="2">2</a> <span class="a">Last &raquo;</span>',
       pager.html.links(3, &:to_s)
 
     assert_equal '<a href="2">Next &gt;</a>', pager.html.links_navigate(1, &:to_s)
@@ -172,19 +178,27 @@ class TestHTML < TestCase
 
   def test_more_pages_to_left_or_right
     pager = Pagify::ArrayPager.new((1..33).to_a, :per_page => 3)
+    pager.html.setting[:first_text] = nil
+    pager.html.setting[:last_text] = nil
+    pager.html.setting[:class] = nil
+    pager.html.setting[:active_class] = 'g'
 
-    first = ['&laquo; First', '<a href="1">&laquo; First</a>']
-    last  = ['Last &raquo;',  '<a href="11">Last &raquo;</a>']
+    first = ['<span class="g">1</span>', '<a href="1">1</a>']
+    last  = ['<span class="g">11</span>', '<a href="11">11</a>']
 
     (1..11).each{ |page|
-      expected = (2..10).map{ |i| i == page ? i.to_s : "<a href=\"#{i}\">#{i}</a>" }
+      expected = (2..10).map{ |i|
+        if i == page
+          %Q{<span class="g">#{i}</span>}
+        else
+          %Q{<a href="#{i}">#{i}</a>}
+        end
+      }
 
       expected.unshift( page == 1  ? first.first : first.last )
       expected.push(    page == 11 ?  last.first :  last.last )
 
       assert_equal expected.join(' '), pager.html.links(page, &:to_s)
     }
-
   end
-
 end

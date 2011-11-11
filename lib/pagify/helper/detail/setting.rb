@@ -12,7 +12,7 @@ module Pagify
       end
 
       def [] key
-        if @attributes[key]
+        if @attributes.key?(key)
            @attributes[key]
         else
           @parent[key]
