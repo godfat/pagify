@@ -1,5 +1,22 @@
 # CHANGES
 
+## pagify 0.8.0 / ?
+
+Adopt changes from @agios
+
+* Setting `setting[:first_text]` to `nil` would make pagify
+  use page number as the first_text. The same goes to
+  `setting[:last_text]`
+
+* Added a `<span class="pagination_active">` wrapper for active
+  page. You can change the class by changing `setting[:active_class]`
+
+* Now links would by default contain `class="pagination_inactive"`.
+  You can also change the class name by changing `setting[:inactive_class]`
+  Set it to `nil` would disable this.
+
+* Fixed a deprecation warning on activerecord 3.1.1
+
 ## pagify 0.7.1 / 2010-04-26
 
 * fix the problem that RUBY_VERSION is forzen,
