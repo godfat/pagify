@@ -1,6 +1,6 @@
 # CHANGES
 
-## pagify 0.8.0 / ?
+## pagify 0.8.0 / 2011-11-16
 
 Adopt changes from @agios
 

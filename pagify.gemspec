@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Lin Jen-Shin (godfat)"]
-  s.date = "2011-11-12"
+  s.date = "2011-11-16"
   s.description = "Pagination tools for Array(or custom class), DataMapper and ActiveRecord.\nHelpers for Innate/Ramaze and Rails included."
   s.email = ["godfat (XD) godfat.org"]
   s.files = [
