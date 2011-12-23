@@ -138,6 +138,11 @@ or set `pager.null_page = false` anytime.
 
 See example or test for more examples (and use case for `ActiveRecordPager`).
 
+## CONTRIBUTORS:
+
+* Lin Jen-Shin (@godfat)
+* @agios
+
 ## LICENSE:
 
 Apache License 2.0
